@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPGOfficial - Smart Collection</title>
+    <title>PPGOfficial - Instant Reset</title>
 
     <style>
         :root {
@@ -11,6 +11,7 @@
             --bg-dark: #0a0c10;
             --card-bg: #161b22;
             --text-main: #f0f6fc;
+            --accent-glow: rgba(0, 210, 255, 0.4);
         }
 
         body { 
@@ -26,7 +27,7 @@
             padding: 40px 20px; text-align: center; border-bottom: 1px solid #30363d;
         }
 
-        header h1 { margin: 0; font-size: 2.5em; color: var(--primary-color); text-transform: uppercase; }
+        header h1 { margin: 0; font-size: 2.5em; color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; }
 
         nav { 
             background-color: rgba(22, 27, 34, 0.9); 
@@ -35,60 +36,86 @@
             position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #30363d;
         }
 
-        nav a { color: white; text-decoration: none; padding: 8px 18px; background-color: #21262d; border-radius: 20px; font-size: 0.85em; transition: 0.3s; }
+        nav a { color: white; text-decoration: none; padding: 8px 18px; background-color: #21262d; border-radius: 20px; font-size: 0.85em; transition: 0.3s; font-weight: bold; }
         nav a:hover { background-color: var(--primary-color); }
 
-        /* Search Box Style */
-        .search-container { text-align: center; margin: 20px auto; max-width: 90%; }
+        .search-wrapper {
+            max-width: 450px; margin: 20px auto; position: relative; display: flex; align-items: center; gap: 10px; padding: 0 15px;
+        }
+        
+        /* Search Box */
         .search-box { 
-            width: 100%; max-width: 400px; padding: 12px; border-radius: 25px; 
+            flex-grow: 1; padding: 12px 20px; border-radius: 25px; 
             border: 1px solid #333; background-color: #1a1a1a; color: white; 
-            font-size: 1em; outline: none; text-align: center;
+            font-size: 1em; outline: none; transition: 0.3s; text-align: center;
+        }
+        .search-box:focus { border-color: var(--primary-color); box-shadow: 0 0 10px var(--accent-glow); }
+        
+        .search-btn {
+            background-color: var(--primary-color); border: none; color: black;
+            padding: 10px 15px; border-radius: 50%; cursor: pointer; transition: 0.3s;
         }
 
-        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .history-container {
+            max-width: 500px; margin: 10px auto; display: flex; flex-wrap: wrap; 
+            justify-content: center; gap: 8px; padding: 0 10px;
+        }
+        .history-tag {
+            background: #21262d; color: var(--primary-color); padding: 5px 12px;
+            border-radius: 15px; font-size: 0.8em; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; border: 1px solid #30363d;
+        }
+        .del-history { color: #ff4d4d; font-weight: bold; margin-left: 5px; }
+        .clear-all { font-size: 0.75em; color: #8b949e; cursor: pointer; text-decoration: underline; display: block; text-align: center; margin-bottom: 20px; }
 
+        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
         .category-section { margin-bottom: 50px; }
         .category-title { border-left: 5px solid var(--primary-color); padding-left: 15px; margin-bottom: 20px; }
 
         .movie-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-            gap: 20px; 
-            overflow: hidden;
-            transition: max-height 0.5s ease;
+            gap: 25px; overflow: hidden;
+            transition: max-height 0.6s ease;
         }
+        .movie-grid.collapsed { max-height: 380px; }
 
-        .movie-grid.collapsed {
-            max-height: 380px; 
-        }
-
+        /* Mouse Hover Effect */
         .movie-card { 
             background-color: var(--card-bg); border-radius: 12px; overflow: hidden; 
-            border: 1px solid #30363d; transition: 0.3s; display: flex; flex-direction: column;
+            border: 1px solid #30363d; display: flex; flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .movie-card:hover { 
+            transform: translateY(-10px) scale(1.03); 
+            border-color: var(--primary-color); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 15px var(--accent-glow); 
+        }
+        .movie-card img { width: 100%; height: 230px; object-fit: cover; transition: 0.4s; }
+        .movie-card:hover img { filter: brightness(1.1); }
 
-        .movie-card img { width: 100%; height: 230px; object-fit: cover; background-color: #222; }
-        .movie-info { padding: 10px; text-align: center; flex-grow: 1; }
-        .movie-title { font-size: 0.9em; margin-bottom: 10px; height: 2.4em; overflow: hidden; color: #fff; }
+        .movie-info { padding: 12px; text-align: center; flex-grow: 1; }
+        .movie-title { font-size: 0.9em; margin-bottom: 12px; height: 2.4em; overflow: hidden; color: #fff; }
 
         .btn-link { 
             display: block; background: #0088cc; color: white; 
-            text-decoration: none; padding: 8px; border-radius: 5px; font-size: 0.8em; font-weight: bold;
+            text-decoration: none; padding: 8px; border-radius: 6px; font-size: 0.8em; font-weight: bold;
+            transition: 0.3s;
         }
+        .btn-link:hover { background: var(--primary-color); color: #000; }
 
-        .toggle-container { text-align: center; margin-top: 20px; }
-
+        .toggle-container { text-align: center; margin-top: 30px; }
         .toggle-btn {
-            width: 45px; height: 45px; border-radius: 50%; background-color: var(--primary-color);
-            border: none; color: white; font-size: 20px; cursor: pointer; transition: 0.3s;
-            display: inline-flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; border-radius: 50%; 
+            background-color: #21262d; border: 2px solid var(--primary-color); 
+            color: var(--primary-color); font-size: 22px; cursor: pointer; transition: 0.3s;
         }
 
-        #no-results { display: none; text-align: center; color: #ff4d4d; margin: 20px; }
+        #no-results { display: none; text-align: center; color: #ff4d4d; margin: 20px; font-weight: bold; }
+        footer { text-align: center; padding: 40px; color: #8b949e; border-top: 1px solid #30363d; }
 
         @media (max-width: 600px) {
-            .movie-grid { grid-template-columns: repeat(2, 1fr); }
+            .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .movie-grid.collapsed { max-height: 750px; } 
         }
     </style>
@@ -108,20 +135,28 @@
 </nav>
 
 <div class="search-container">
-    <input type="text" id="searchInput" class="search-box" onkeyup="searchMovies()" placeholder="ဇာတ်ကားအမည် ရှာရန်...">
+    <div class="search-wrapper">
+        <!-- oninput ကို သုံးပြီး စာသားဖြတ်တာနဲ့ ချက်ချင်း စစ်ဆေးခိုင်းထားပါတယ် -->
+        <input type="text" id="searchInput" class="search-box" 
+               oninput="checkEmptySearch(this.value)"
+               onkeypress="if(event.keyCode == 13) handleSearch()" 
+               placeholder="ရှာဖွေပြီး Enter နှိပ်ပါ...">
+        <button class="search-btn" onclick="handleSearch()">🔍</button>
+    </div>
+    <div class="history-container" id="historyContainer"></div>
+    <span class="clear-all" id="clearBtn" onclick="clearAllHistory()" style="display:none;">Clear History</span>
 </div>
 
 <div class="container">
-    <div id="no-results">ဇာတ်ကား ရှာမတွေ့ပါ!</div>
+    <div id="no-results">🔍 ရှာမတွေ့ပါ၊ စာလုံးပေါင်း ပြန်စစ်ပေးပါ။</div>
     
-    <!-- ၁။ မြန်မာကား အပိုင်း -->
     <div class="category-section" id="sec-myanmar">
         <h2 id="myanmar" class="category-title">မြန်မာဇာတ်ကားများ</h2>
         <div class="movie-grid collapsed" id="grid-myanmar">
             <div class="movie-card">
                 <img src="https://via.placeholder.com/300x450?text=Myanmar+Movie">
                 <div class="movie-info">
-                    <div class="movie-title">မြန်မာကား အမည်ထည့်ရန်</div>
+                    <div class="movie-title">မြန်မာကား အမည်</div>
                     <a href="#" class="btn-link">Telegram တွင်ကြည့်ရန်</a>
                 </div>
             </div>
@@ -129,7 +164,6 @@
         <div class="toggle-container"><button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">></button></div>
     </div>
 
-    <!-- ၂။ ဂျပန်ကား အပိုင်း -->
     <div class="category-section" id="sec-japan">
         <h2 id="japan" class="category-title">ဂျပန်ဇာတ်ကားများ</h2>
         <div class="movie-grid collapsed" id="grid-japan">
@@ -143,22 +177,14 @@
         <div class="toggle-container"><button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">></button></div>
     </div>
 
-    <!-- ၃။ တရုတ်ကား အပိုင်း -->
     <div class="category-section" id="sec-china">
         <h2 id="china" class="category-title">တရုတ်ဇာတ်ကားများ</h2>
         <div class="movie-grid collapsed" id="grid-china">
-            <div class="movie-card">
-                <img src="https://i.ibb.co/rRF4tm4B/6122790998359780986-120.jpg">
-                <div class="movie-info">
-                    <div class="movie-title">91CM-083</div>
-                    <a href="https://t.me/ppgchina/257?single" class="btn-link">Telegram တွင်ကြည့်ရန်</a>
-                </div>
-            </div>
+            <div class="movie-card"><img src="https://i.ibb.co/rRF4tm4B/6122790998359780986-120.jpg"><div class="movie-info"><div class="movie-title">91CM-083</div><a href="https://t.me/ppgchina/257?single" class="btn-link">Telegram တွင်ကြည့်ရန်</a></div></div>
         </div>
         <div class="toggle-container"><button class="toggle-btn" onclick="toggleGrid('grid-china', this)">></button></div>
     </div>
 
-    <!-- ၄။ နိုင်ငံခြားကား အပိုင်း -->
     <div class="category-section" id="sec-intl">
         <h2 id="international" class="category-title">နိုင်ငံခြားဇာတ်ကားများ</h2>
         <div class="movie-grid collapsed" id="grid-intl">
@@ -176,6 +202,8 @@
 </footer>
 
 <script>
+    document.addEventListener('DOMContentLoaded', displayHistory);
+
     function toggleGrid(gridId, btn) {
         let grid = document.getElementById(gridId);
         if (grid.classList.contains('collapsed')) {
@@ -190,15 +218,27 @@
         }
     }
 
-    function searchMovies() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
+    // စာသားဖြတ်လိုက်တာနဲ့ ချက်ချင်းစစ်ဆေးပေးမယ့် Function
+    function checkEmptySearch(val) {
+        if (val.trim() === "") {
+            performSearch(""); // စာသားမရှိရင် အကုန်ပြန်ပြမယ်
+        }
+    }
+
+    function handleSearch() {
+        let val = document.getElementById('searchInput').value;
+        if (val.trim() !== "") {
+            saveHistory(val);
+        }
+        performSearch(val);
+    }
+
+    function performSearch(val) {
+        let input = val.toLowerCase().trim();
         let movieCards = document.getElementsByClassName('movie-card');
         let noResults = document.getElementById('no-results');
-        let hasResult = false;
-
-        // ရှာဖွေတဲ့အခါ Grid အားလုံးကို အကုန်ဖွင့်ချလိုက်မယ် (ဒါမှ အောက်ရောက်နေတဲ့ကားတွေ မြင်ရမှာပါ)
         let grids = document.getElementsByClassName('movie-grid');
-        let toggles = document.getElementsByClassName('toggle-container');
+        let hasResult = false;
 
         for (let i = 0; i < movieCards.length; i++) {
             let title = movieCards[i].getElementsByClassName('movie-title')[0].innerText.toLowerCase();
@@ -210,16 +250,59 @@
             }
         }
 
-        // ရှာနေစဉ်အတွင်း "Show More" ခလုတ်တွေကို ခေတ္တဖျောက်ထားပြီး Grid အမြင့်ကို ဖွင့်ပေးထားပါမယ်
         for (let g of grids) {
-            if (input !== "") {
-                g.style.maxHeight = "none";
+            if (input === "") {
+                g.style.maxHeight = ""; 
+                g.classList.add('collapsed');
+                let btn = g.parentElement.querySelector('.toggle-btn');
+                if(btn) btn.innerText = ">";
             } else {
-                g.style.maxHeight = ""; // Reset to CSS
+                g.style.maxHeight = "none"; 
             }
         }
-        
         noResults.style.display = hasResult ? "none" : "block";
+    }
+
+    function saveHistory(value) {
+        let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        if (!history.includes(value)) {
+            history.unshift(value);
+            if (history.length > 5) history.pop();
+            localStorage.setItem('searchHistory', JSON.stringify(history));
+            displayHistory();
+        }
+    }
+
+    function displayHistory() {
+        let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        let container = document.getElementById('historyContainer');
+        let clearBtn = document.getElementById('clearBtn');
+        container.innerHTML = "";
+        if (history.length > 0) {
+            clearBtn.style.display = "block";
+            history.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="history-tag">
+                        <span onclick="document.getElementById('searchInput').value='${item}'; performSearch('${item}')">${item}</span>
+                        <span class="del-history" onclick="deleteItem(${index})">×</span>
+                    </div>
+                `;
+            });
+        } else {
+            clearBtn.style.display = "none";
+        }
+    }
+
+    function deleteItem(index) {
+        let history = JSON.parse(localStorage.getItem('searchHistory'));
+        history.splice(index, 1);
+        localStorage.setItem('searchHistory', JSON.stringify(history));
+        displayHistory();
+    }
+
+    function clearAllHistory() {
+        localStorage.removeItem('searchHistory');
+        displayHistory();
     }
 </script>
 
