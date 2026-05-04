@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPGOffical - Movie Collection</title>
+
+    <!-- App ပုံစံမျိုးဖြစ်စေရန်နှင့် Address Bar ဖျောက်ရန် Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: #e0e0e0; margin: 0; padding: 0; scroll-behavior: smooth; }
         header { background-color: #1a1a1a; padding: 30px 20px; text-align: center; border-bottom: 3px solid #0088cc; }
@@ -18,14 +24,12 @@
         .search-box { width: 100%; max-width: 400px; padding: 12px; border-radius: 25px; border: 1px solid #333; background-color: #1a1a1a; color: white; font-size: 1em; outline: none; text-align: center; }
         .search-box:focus { border-color: #0088cc; box-shadow: 0 0 8px rgba(0, 136, 204, 0.5); }
 
-        .container { padding: 15px; max-width: 1200px; margin: 0 auto; }
+        .container { padding: 15px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
         .category-title { border-left: 5px solid #0088cc; padding-left: 12px; margin: 40px 0 20px; font-size: 1.5em; color: #fff; }
 
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
         .movie-card { background-color: #1a1a1a; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: 0.3s; border: 1px solid #333; display: flex; flex-direction: column; }
         .movie-card:hover { transform: scale(1.03); border-color: #0088cc; }
-        
-        /* Image styling with optimization */
         .movie-card img { width: 100%; height: 220px; object-fit: cover; background-color: #222; }
         
         .movie-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
@@ -33,6 +37,11 @@
 
         .btn-link { display: block; background-color: #0088cc; color: white; text-decoration: none; padding: 8px; border-radius: 5px; font-size: 0.85em; font-weight: bold; }
         .btn-link:hover { background-color: #0077b3; }
+
+        /* Footer Style */
+        footer { background-color: #1a1a1a; padding: 30px 20px; text-align: center; border-top: 1px solid #333; margin-top: 50px; color: #aaaaaa; }
+        footer p { font-size: 0.9em; margin: 5px 0; }
+        footer a { color: #0088cc; text-decoration: none; font-weight: bold; }
 
         #no-results { display: none; text-align: center; color: #ff4d4d; font-size: 1.2em; margin-top: 20px; }
 
@@ -60,6 +69,7 @@
 <div class="container">
     <div id="no-results">ဇာတ်ကား ရှာမတွေ့ပါ! စာလုံးပေါင်း ပြန်စစ်ကြည့်ပါ။</div>
     
+    <!-- မြန်မာကား အပိုင်း -->
     <h2 id="myanmar" class="category-title">မြန်မာဇာတ်ကားများ</h2>
     <div class="movie-grid">
         <div class="movie-card">
@@ -71,6 +81,7 @@
         </div>
     </div>
 
+    <!-- ဂျပန်ကား အပိုင်း -->
     <h2 id="japan" class="category-title">ဂျပန်ဇာတ်ကားများ </h2>
     <div class="movie-grid">
         <div class="movie-card">
@@ -114,6 +125,7 @@
         </div>
     </div>
 
+    <!-- တရုတ်ကား အပိုင်း -->
     <h2 id="china" class="category-title">တရုတ်ဇာတ်ကားများ</h2>
     <div class="movie-grid">
         <div class="movie-card">
@@ -125,6 +137,7 @@
         </div>
     </div>
 
+    <!-- နိုင်ငံခြားကား အပိုင်း -->
     <h2 id="international" class="category-title">နိုင်ငံခြားဇာတ်ကားများ</h2>
     <div class="movie-grid">
         <div class="movie-card">
@@ -160,6 +173,12 @@
         </div>
     </div>
 </div>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2026 PPGOfficial. All Rights Reserved.</p>
+    <p>နောက်ဆုံးထွက်ဇာတ်ကားများကြည့်ရန် <a href="https://t.me/PPGOfficalbot" target="_blank">Telegram Channel</a> ကို Join ထားပါ။</p>
+</footer>
 
 <script>
     function searchMovies() {
