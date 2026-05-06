@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PPGOfficial - Ultra Premium Cinema</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
@@ -16,12 +17,9 @@
         }
 
         body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg-dark); 
-            color: var(--text-main); 
-            margin: 0; 
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-main); 
+            margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
         }
 
         /* Navbar */
@@ -31,196 +29,126 @@
             display: flex; justify-content: center; padding: 15px 0; gap: 15px; 
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        nav a { color: var(--text-dim); text-decoration: none; font-size: 0.8em; font-weight: 600; transition: 0.3s; }
-        nav a:hover { color: var(--primary); }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 0.8em; font-weight: 600; text-transform: uppercase; }
 
-        header { padding: 110px 20px 20px; text-align: center; }
-        header h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8em, 8vw, 3em); color: var(--primary); margin: 0; }
+        header { padding: 110px 20px 10px; text-align: center; }
+        header h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2em, 8vw, 3em); color: var(--primary); margin: 0; text-shadow: 0 0 20px rgba(0,210,255,0.4); }
 
-        /* Search Box */
-        .search-container { display: flex; justify-content: center; padding: 15px 20px; }
+        /* Search Area */
+        .search-container { display: flex; flex-direction: column; align-items: center; padding: 15px 20px; gap: 10px; }
+        .search-wrapper { position: relative; width: 100%; max-width: 500px; }
+        .search-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 1.1em; }
         .search-box { 
-            width: 100%; max-width: 500px; padding: 12px 25px; border-radius: 30px; 
+            width: 100%; padding: 14px 20px 14px 50px; border-radius: 30px; box-sizing: border-box;
             border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); 
-            color: white; outline: none; transition: 0.3s; font-size: 16px; /* Prevents iOS zoom */
+            color: white; outline: none; font-size: 16px; transition: 0.3s;
         }
-        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,210,255,0.3); }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,210,255,0.2); }
+
+        #searchHistory { width: 100%; max-width: 480px; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; justify-content: center; }
+        .history-item { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 15px; font-size: 0.7em; cursor: pointer; color: var(--text-dim); transition: 0.2s; }
+        .history-item:hover { background: var(--primary); color: #000; }
 
         /* Container & Grids */
-        .container { padding: 10px 15px 50px; max-width: 1200px; margin: 0 auto; }
-        .category-title { 
-            color: var(--primary); border-left: 4px solid var(--primary); 
-            padding-left: 12px; margin: 30px 0 15px; font-size: 1.1em; letter-spacing: 1px;
-        }
+        .container { padding: 10px 15px 100px; max-width: 1200px; margin: 0 auto; }
+        .category-title { color: var(--primary); border-left: 4px solid var(--primary); padding-left: 12px; margin: 35px 0 15px; font-size: 1.1em; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+        .grid-collapsed { max-height: 520px; overflow: hidden; mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); }
 
-        .movie-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-            gap: 15px; 
-            transition: max-height 0.5s ease;
-        }
-        
-        .grid-collapsed { 
-            max-height: 520px; 
-            overflow: hidden; 
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-        }
-
-        .movie-card { 
-            background: var(--card-bg); border-radius: 12px; overflow: hidden; 
-            position: relative; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
-        }
+        .movie-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .movie-card:hover { border-color: var(--primary); transform: translateY(-5px); }
         .movie-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .q-badge { position: absolute; top: 8px; left: 8px; background: var(--primary); color: #000; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; z-index: 5; }
+        .movie-info { padding: 10px; text-align: center; font-size: 0.8em; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .q-badge {
-            position: absolute; top: 8px; left: 8px; background: var(--primary);
-            color: #000; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; z-index: 5;
-        }
-        .q-badge.new { background: #ffbc00; }
+        .toggle-btn { display: block; margin: 20px auto; padding: 10px 25px; background: none; border: 1px solid var(--primary); color: var(--primary); border-radius: 25px; cursor: pointer; font-size: 0.9em; font-weight: 600; }
 
-        .movie-info { padding: 10px; text-align: center; }
-        .movie-title { font-size: 0.8em; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main); }
+        /* Floating Buttons */
+        .float-btn { position: fixed; right: 20px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; border: none; font-size: 1.4em; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        #backToTop { bottom: 90px; background: var(--primary); color: #000; display: none; }
+        #tgContact { bottom: 25px; background: #229ED9; color: #fff; text-decoration: none; }
+        .float-btn:active { transform: scale(0.9); }
 
-        /* Toggle Button */
-        .toggle-btn {
-            display: block; margin: 20px auto; padding: 10px 25px; 
-            background: none; border: 1px solid var(--primary); color: var(--primary);
-            border-radius: 25px; cursor: pointer; transition: 0.3s; font-size: 0.9em;
-        }
-
-        /* Modal - အထူးပြင်ဆင်ထားသောအပိုင်း */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: none; justify-content: center; 
-            align-items: center; z-index: 3000;
-        }
-        .modal-content {
-            background: #0d1117; width: 92%; max-width: 800px; border-radius: 20px;
-            display: flex; flex-direction: row; overflow: hidden; 
-            border: 1px solid var(--primary); position: relative;
-            max-height: 85vh; animation: zoomIn 0.2s ease-out;
-        }
-        @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        .modal-left { width: 45%; background: #000; }
+        /* Modal */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 15px; box-sizing: border-box; }
+        .modal-content { background: #0d1117; width: 100%; max-width: 800px; border-radius: 20px; display: flex; flex-direction: row; overflow: hidden; border: 1px solid var(--primary); position: relative; max-height: 85vh; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        .modal-left { width: 45%; }
         .modal-left img { width: 100%; height: 100%; object-fit: cover; }
         .modal-right { width: 55%; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; }
-        
-        .close { 
-            position: absolute; top: 10px; right: 15px; font-size: 32px; 
-            cursor: pointer; color: #fff; z-index: 100; text-shadow: 0 0 10px #000;
-        }
+        .close { position: absolute; top: 10px; right: 20px; font-size: 35px; color: #fff; cursor: pointer; z-index: 100; }
+        .watch-btn { display: block; width: 100%; padding: 16px; background: var(--primary); color: #000; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 20px; text-transform: uppercase; }
 
-        .watch-btn {
-            display: block; width: 100%; padding: 15px; background: var(--primary);
-            color: #000; text-align: center; text-decoration: none; border-radius: 12px; 
-            font-weight: 800; margin-top: auto; font-size: 0.95em;
-        }
-
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
+            .modal-content { flex-direction: column; }
+            .modal-left { height: 250px; width: 100%; }
+            .modal-right { width: 100%; padding: 25px; box-sizing: border-box; }
             .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .modal-content { flex-direction: column; height: auto; max-height: 90vh; }
-            .modal-left { width: 100%; height: 220px; }
-            .modal-right { width: 100%; padding: 20px; box-sizing: border-box; }
-            .modal-right h2 { font-size: 1.2em; margin: 10px 0; }
-            .watch-btn { margin-top: 20px; }
+            header h1 { font-size: 2em; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#sec-myanmar">မြန်မာ</a>
-    <a href="#sec-japan">ဂျပန်</a>
-    <a href="#sec-china">တရုတ်</a>
-    <a href="#sec-intl">နိုင်ငံခြား</a>
+    <a href="#sec-myanmar">မြန်မာ</a> <a href="#sec-japan">ဂျပန်</a> <a href="#sec-china">တရုတ်</a> <a href="#sec-intl">နိုင်ငံခြား</a>
 </nav>
 
-<header>
-    <h1>PPGOFFICIAL</h1>
-</header>
+<header><h1>PPGOFFICIAL</h1></header>
 
 <div class="search-container">
-    <input type="text" id="searchBox" class="search-box" placeholder="ဇာတ်ကားရှာရန်..." onkeyup="doSearch()">
+    <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchBox" class="search-box" placeholder="ဇာတ်ကားအမည်ဖြင့် ရှာပါ..." onkeyup="doSearch(event)">
+    </div>
+    <div id="searchHistory"></div>
 </div>
 
 <div class="container">
-    <section id="sec-myanmar">
-        <h2 class="category-title">MYANMAR</h2>
-        <div class="movie-grid grid-collapsed" id="grid-myanmar"></div>
-        <button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">View More</button>
-    </section>
-
-    <section id="sec-japan">
-        <h2 class="category-title">JAPANESE</h2>
-        <div class="movie-grid grid-collapsed" id="grid-japan"></div>
-        <button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">View More</button>
-    </section>
-
-    <section id="sec-china">
-        <h2 class="category-title">CHINESE</h2>
-        <div class="movie-grid grid-collapsed" id="grid-china"></div>
-        <button class="toggle-btn" onclick="toggleGrid('grid-china', this)">View More</button>
-    </section>
-
-    <section id="sec-intl">
-        <h2 class="category-title">INTERNATIONAL</h2>
-        <div class="movie-grid grid-collapsed" id="grid-intl"></div>
-        <button class="toggle-btn" onclick="toggleGrid('grid-intl', this)">View More</button>
-    </section>
+    <section id="sec-myanmar"><h2 class="category-title">MYANMAR</h2><div class="movie-grid grid-collapsed" id="grid-myanmar"></div><button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">View More</button></section>
+    <section id="sec-japan"><h2 class="category-title">JAPANESE</h2><div class="movie-grid grid-collapsed" id="grid-japan"></div><button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">View More</button></section>
+    <section id="sec-china"><h2 class="category-title">CHINESE</h2><div class="movie-grid grid-collapsed" id="grid-china"></div><button class="toggle-btn" onclick="toggleGrid('grid-china', this)">View More</button></section>
+    <section id="sec-intl"><h2 class="category-title">INTERNATIONAL</h2><div class="movie-grid grid-collapsed" id="grid-intl"></div><button class="toggle-btn" onclick="toggleGrid('grid-intl', this)">View More</button></section>
 </div>
+
+<button id="backToTop" class="float-btn" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
+<a href="https://t.me/pyawpyawgyi" id="tgContact" class="float-btn" target="_blank"><i class="fa-brands fa-telegram"></i></a>
 
 <div id="movieModal" class="modal" onclick="closeM()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close" onclick="closeM()">&times;</span>
-        <div class="modal-left">
-            <img id="mImg" src="" alt="poster">
-        </div>
+        <div class="modal-left"><img id="mImg" src=""></div>
         <div class="modal-right">
-            <h2 id="mTitle" style="margin: 0 0 10px 0; line-height: 1.2;"></h2>
-            <div style="margin-bottom:15px; display: flex; align-items: center; gap: 10px;">
-                <span id="mRate" style="color:#ffbc00; font-weight:800;"></span>
-                <span id="mQual" style="border:1px solid var(--primary); padding:2px 8px; border-radius:5px; font-size:0.7em; color:var(--primary); font-weight:bold;"></span>
-            </div>
-            <p id="mDesc" style="color:var(--text-dim); line-height:1.6; font-size:0.9em; margin: 0 0 20px 0;"></p>
+            <h2 id="mTitle" style="margin:0 0 10px 0;"></h2>
+            <div style="margin-bottom:15px;"><span id="mRate" style="color:#ffbc00; font-weight:800;"></span> <span id="mQual" style="margin-left:10px; border:1px solid var(--primary); padding:2px 6px; border-radius:5px; font-size:0.7em; color:var(--primary);"></span></div>
+            <p id="mDesc" style="color:var(--text-dim); line-height:1.6; font-size:0.9em; margin-bottom:20px;"></p>
             <a id="mLink" href="#" target="_blank" class="watch-btn">WATCH ON TELEGRAM</a>
         </div>
     </div>
 </div>
 
 <script>
-    // ဇာတ်ကားများ စတင်ဖတ်ယူခြင်း
-    async function init() {
+    let searchHistory = JSON.parse(localStorage.getItem('ppgHistory')) || [];
+
+    async function loadMovies() {
         try {
             const res = await fetch('movies.json');
-            const data = await res.json();
-            
-            data.forEach(movie => {
+            const movies = await res.json();
+            movies.forEach(movie => {
                 const grid = document.getElementById(`grid-${movie.category}`);
                 if(grid) {
                     const card = document.createElement('div');
                     card.className = 'movie-card';
-                    const qClass = movie.quality === 'NEW' ? 'q-badge new' : 'q-badge';
-                    
-                    card.innerHTML = `
-                        <div class="${qClass}">${movie.quality}</div>
-                        <img src="${movie.img}" alt="poster" loading="lazy">
-                        <div class="movie-info">
-                            <div class="movie-title">${movie.title}</div>
-                        </div>
-                    `;
+                    card.innerHTML = `<div class="q-badge">${movie.quality}</div><img src="${movie.img}"><div class="movie-info">${movie.title}</div>`;
                     card.onclick = () => openM(movie);
                     grid.appendChild(card);
                 }
             });
-        } catch (err) {
-            console.error("Data loading failed:", err);
-        }
+            updateHistoryUI();
+        } catch (e) { console.error("Error loading JSON:", e); }
     }
 
-    // Modal ဖွင့်ခြင်း
     function openM(m) {
         document.getElementById('mImg').src = m.img;
         document.getElementById('mTitle').innerText = m.title;
@@ -228,43 +156,36 @@
         document.getElementById('mQual').innerText = m.quality;
         document.getElementById('mDesc').innerText = m.description;
         document.getElementById('mLink').href = m.link;
-        
-        const modal = document.getElementById('movieModal');
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Scroll ပိတ်မယ်
+        document.getElementById('movieModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
-    // Modal ပိတ်ခြင်း
     function closeM() {
         document.getElementById('movieModal').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Scroll ပြန်ဖွင့်မယ်
+        document.body.style.overflow = 'auto';
     }
 
-    // View More Logic
     function toggleGrid(id, btn) {
         const grid = document.getElementById(id);
-        if (grid.classList.contains('grid-collapsed')) {
-            grid.classList.remove('grid-collapsed');
-            btn.innerText = "Show Less";
-        } else {
-            grid.classList.add('grid-collapsed');
-            btn.innerText = "View More";
-            btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        grid.classList.toggle('grid-collapsed');
+        btn.innerText = grid.classList.contains('grid-collapsed') ? "View More" : "Show Less";
     }
 
-    // Search Logic
-    function doSearch() {
+    function doSearch(e) {
         const query = document.getElementById('searchBox').value.toLowerCase();
         const cards = document.querySelectorAll('.movie-card');
-        const btns = document.querySelectorAll('.toggle-btn');
-        const grids = document.querySelectorAll('.movie-grid');
-
+        
         cards.forEach(card => {
-            const title = card.innerText.toLowerCase();
-            card.style.display = title.includes(query) ? "block" : "none";
+            card.style.display = card.innerText.toLowerCase().includes(query) ? "block" : "none";
         });
 
+        if (e && e.key === 'Enter' && query.trim() !== "") {
+            saveToHistory(query.trim());
+        }
+
+        // ရှာနေချိန်မှာ View More ခလုတ်တွေ ခေတ္တဖျောက်ထားမယ်
+        const btns = document.querySelectorAll('.toggle-btn');
+        const grids = document.querySelectorAll('.movie-grid');
         if(query.length > 0) {
             grids.forEach(g => g.classList.remove('grid-collapsed'));
             btns.forEach(b => b.style.display = 'none');
@@ -274,7 +195,36 @@
         }
     }
 
-    window.onload = init;
+    function saveToHistory(q) {
+        if (!searchHistory.includes(q)) {
+            searchHistory.unshift(q);
+            if (searchHistory.length > 5) searchHistory.pop();
+            localStorage.setItem('ppgHistory', JSON.stringify(searchHistory));
+            updateHistoryUI();
+        }
+    }
+
+    function updateHistoryUI() {
+        const container = document.getElementById('searchHistory');
+        container.innerHTML = searchHistory.map(h => `<span class="history-item" onclick="quickSearch('${h}')">${h}</span>`).join('');
+    }
+
+    function quickSearch(val) {
+        document.getElementById('searchBox').value = val;
+        doSearch();
+    }
+
+    // Scroll effect for Back to Top button
+    window.onscroll = function() {
+        const btt = document.getElementById('backToTop');
+        btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    };
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onload = loadMovies;
 </script>
 
 </body>
