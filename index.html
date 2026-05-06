@@ -13,7 +13,7 @@
             --card-bg: rgba(22, 27, 34, 0.8);
             --text-main: #f0f6fc;
             --text-dim: #8b949e;
-            --accent-glow: rgba(0, 210, 255, 0.4);
+            --accent-glow: rgba(0, 210, 255, 0.5);
         }
 
         /* Scrollbar */
@@ -82,17 +82,57 @@
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px; }
         .movie-grid.collapsed { max-height: 440px; overflow: hidden; mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
 
-        .movie-card { position: relative; background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; cursor: pointer; }
-        .movie-card img { width: 100%; height: 260px; object-fit: cover; background: #1a1d23; }
+        /* --- Movie Card with Glow Effect --- */
+        .movie-card { 
+            position: relative; 
+            background: var(--card-bg); 
+            border-radius: 15px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer;
+        }
+
+        /* မီးလင်းမည့် အလွှာ */
+        .movie-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 15px;
+            box-shadow: inset 0 0 0 2px transparent;
+            transition: 0.4s;
+            pointer-events: none;
+        }
+
+        .movie-card:hover { 
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--accent-glow), 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .movie-card:hover::after {
+            box-shadow: inset 0 0 15px var(--accent-glow);
+        }
+
+        .movie-card img { width: 100%; height: 260px; object-fit: cover; background: #1a1d23; transition: 0.4s; }
+        .movie-card:hover img { filter: brightness(1.1); }
+
         .quality-badge { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; font-size: 10px; font-weight: bold; padding: 3px 8px; border-radius: 5px; z-index: 5; }
-        .movie-info { padding: 15px; text-align: center; }
+        .movie-info { padding: 15px; text-align: center; transition: 0.3s; }
+        .movie-card:hover .movie-info { background: rgba(0, 210, 255, 0.05); }
+
         .movie-title { font-size: 0.9em; font-weight: 600; margin-bottom: 12px; height: 1.2em; overflow: hidden; }
-        .btn-link { display: block; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: white; text-decoration: none; padding: 10px; border-radius: 10px; font-size: 0.8em; font-weight: bold; transition: 0.3s; }
+        .btn-link { display: block; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: white; text-decoration: none; padding: 10px; border-radius: 10px; font-size: 0.8em; font-weight: bold; transition: 0.3s; position: relative; z-index: 2; }
+        .btn-link:hover { transform: scale(1.05); box-shadow: 0 5px 15px var(--accent-glow); }
         
         .toggle-btn { background: transparent; border: 1px solid #30363d; color: var(--text-dim); padding: 12px 30px; border-radius: 25px; cursor: pointer; transition: 0.3s; margin: 25px auto; display: block; font-weight: bold; }
+        .toggle-btn:hover { border-color: var(--primary); color: var(--primary); }
+
         #noResult { display: none; text-align: center; padding: 50px 20px; color: var(--text-dim); }
         .floating-tg { position: fixed; bottom: 30px; left: 30px; background: #26A5E4; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 20px rgba(38, 165, 228, 0.4); z-index: 2000; transition: 0.3s; text-decoration: none; font-size: 22px; }
-        #backToTop { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 55px; height: 55px; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; border: none; font-size: 20px; }
+        .floating-tg:hover { transform: scale(1.1) rotate(10deg); }
+
+        #backToTop { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 55px; height: 55px; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; border: none; font-size: 20px; box-shadow: 0 0 15px var(--accent-glow); }
 
         @media (max-width: 600px) {
             .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -127,7 +167,7 @@
         <h3>ရှာဖွေမှုမတွေ့ပါ</h3>
     </div>
 
-    <!-- မြန်မာ -->
+    <!-- Myanmar -->
     <section id="sec-myanmar">
         <div class="category-header">
             <h2 class="category-title">မြန်မာဇာတ်ကားများ <span class="count-badge" id="count-myanmar">0 Movie</span></h2>
@@ -136,7 +176,7 @@
         <button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">View More ▼</button>
     </section>
 
-    <!-- ဂျပန် -->
+    <!-- Japan -->
     <section id="sec-japan">
         <div class="category-header">
             <h2 class="category-title">ဂျပန်ဇာတ်ကားများ <span class="count-badge" id="count-japan">0 Movie</span></h2>
@@ -145,7 +185,7 @@
         <button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">View More ▼</button>
     </section>
 
-    <!-- တရုတ် -->
+    <!-- China -->
     <section id="sec-china">
         <div class="category-header">
             <h2 class="category-title">တရုတ်ဇာတ်ကားများ <span class="count-badge" id="count-china">0 Movie</span></h2>
@@ -154,7 +194,7 @@
         <button class="toggle-btn" onclick="toggleGrid('grid-china', this)">View More ▼</button>
     </section>
 
-    <!-- နိုင်ငံခြား -->
+    <!-- International -->
     <section id="sec-intl">
         <div class="category-header">
             <h2 class="category-title">နိုင်ငံခြားဇာတ်ကားများ <span class="count-badge" id="count-intl">0 Movie</span></h2>
@@ -168,7 +208,6 @@
 <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
-    // ဇာတ်ကားတွေကို JSON ကနေ ဆွဲထုတ်မယ်
     async function loadMovies() {
         try {
             const response = await fetch('movies.json');
@@ -207,9 +246,11 @@
                 const rect = card.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(1000px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
+                card.style.transform = `perspective(1000px) rotateY(${x * 15}deg) rotateX(${-y * 15}deg) scale(1.03)`;
             });
-            card.addEventListener('mouseleave', () => card.style.transform = ``);
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = ``;
+            });
         });
     }
 
@@ -227,15 +268,17 @@
         let hasResult = false;
 
         cards.forEach(card => {
-            const match = card.getAttribute('data-title').includes(q);
+            const title = card.getAttribute('data-title');
+            const match = title.includes(q);
             card.style.display = match ? "block" : "none";
             if (match) hasResult = true;
         });
 
         document.querySelectorAll('section').forEach(sec => {
-            const visible = sec.querySelectorAll('.movie-card[style="display: block"]').length > 0;
-            sec.style.display = q === "" || visible ? "block" : "none";
-            if (q !== "" && visible) {
+            const visibleCards = sec.querySelectorAll('.movie-card[style="display: block"]').length;
+            sec.style.display = q === "" || visibleCards > 0 ? "block" : "none";
+            
+            if (q !== "" && visibleCards > 0) {
                 const grid = sec.querySelector('.movie-grid');
                 grid.classList.remove('collapsed');
                 grid.style.maxHeight = "none";
