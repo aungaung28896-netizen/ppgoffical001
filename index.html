@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPGOfficial - Premium Cinema</title>
+    <title>PPGOfficial - Ultra Premium Cinema</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <style>
@@ -15,9 +15,7 @@
             --text-dim: #8b949e;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-main); margin: 0; 
-        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-main); margin: 0; overflow-x: hidden; }
 
         /* Navbar */
         nav { 
@@ -26,67 +24,88 @@
             display: flex; justify-content: center; padding: 15px; gap: 15px; 
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        nav a { color: var(--text-dim); text-decoration: none; font-size: 0.8em; padding: 5px 10px; }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 0.85em; transition: 0.3s; }
+        nav a:hover { color: var(--primary); }
 
         header { padding: 120px 20px 30px; text-align: center; }
-        header h1 { font-family: 'Orbitron', sans-serif; font-size: 3em; color: var(--primary); margin: 0; }
+        header h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2em, 8vw, 3.5em); color: var(--primary); margin: 0; }
 
         /* Search Box */
         .search-container { display: flex; justify-content: center; padding: 20px; }
         .search-box { 
             width: 90%; max-width: 500px; padding: 15px 25px; border-radius: 30px; 
-            border: 1px solid var(--primary); background: transparent; color: white; outline: none;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); 
+            color: white; outline: none; transition: 0.3s;
         }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary); }
 
         .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .category-title { color: var(--primary); border-left: 4px solid var(--primary); padding-left: 10px; margin: 30px 0 15px; }
+        .category-title { color: var(--primary); border-left: 4px solid var(--primary); padding-left: 15px; margin: 40px 0 20px; }
 
-        /* Movie Grid */
+        /* Movie Grid with View More Logic */
         .movie-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; 
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        /* ကားများရင် အတန်း ၂ တန်းပဲပြဖို့ */
+        .grid-collapsed { 
+            max-height: 520px; 
+            overflow: hidden; 
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
         .movie-card { 
             background: var(--card-bg); border-radius: 12px; overflow: hidden; 
             position: relative; transition: 0.3s; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
         }
-        .movie-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .movie-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 5px 15px rgba(0,210,255,0.2); }
         .movie-card img { width: 100%; height: 240px; object-fit: cover; }
 
-        /* Quality Badge - ဒီနေရာမှာ ပြင်ထားပါတယ် */
+        /* Badge Styles */
         .q-badge {
-            position: absolute; top: 8px; left: 8px; background: var(--primary);
-            color: #000; font-size: 10px; font-weight: 800; padding: 3px 8px;
-            border-radius: 4px; z-index: 10; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            position: absolute; top: 10px; left: 10px; background: var(--primary);
+            color: #000; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; z-index: 5;
         }
         .q-badge.new { background: #ffbc00; }
 
-        .movie-info { padding: 10px; text-align: center; }
+        .movie-info { padding: 12px; text-align: center; }
         .movie-title { font-size: 0.85em; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* View More Button */
+        .toggle-btn {
+            display: block; margin: 25px auto; padding: 10px 30px; 
+            background: none; border: 1px solid var(--primary); color: var(--primary);
+            border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: 600;
+        }
+        .toggle-btn:hover { background: var(--primary); color: #000; }
 
         /* Modal */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000;
+            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px;
         }
         .modal-content {
-            background: #0f172a; width: 90%; max-width: 700px; border-radius: 20px;
+            background: #0d1117; width: 100%; max-width: 800px; border-radius: 25px;
             display: flex; overflow: hidden; border: 1px solid var(--primary); position: relative;
+            animation: fadeIn 0.3s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
         .modal-left { width: 40%; }
         .modal-left img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-right { width: 60%; padding: 30px; }
-        .close { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
-        
+        .modal-right { width: 60%; padding: 40px; }
+        .close { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; color: var(--text-dim); }
+
         .watch-btn {
-            display: block; width: 100%; padding: 15px; background: var(--primary);
-            color: #000; text-align: center; text-decoration: none; border-radius: 10px; font-weight: 800; margin-top: 20px;
+            display: block; width: 100%; padding: 16px; background: var(--primary);
+            color: #000; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 25px;
         }
 
-        @media (max-width: 600px) {
-            .modal-content { flex-direction: column; }
+        @media (max-width: 768px) {
+            .modal-content { flex-direction: column; height: 85vh; overflow-y: auto; }
             .modal-left, .modal-right { width: 100%; }
-            .modal-left { height: 250px; }
+            .modal-left { height: 300px; }
             .movie-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
@@ -94,10 +113,10 @@
 <body>
 
 <nav>
-    <a href="#sec-myanmar">MYANMAR</a>
-    <a href="#sec-japan">JAPAN</a>
-    <a href="#sec-china">CHINA</a>
-    <a href="#sec-intl">INTL</a>
+    <a href="#sec-myanmar">မြန်မာ</a>
+    <a href="#sec-japan">ဂျပန်</a>
+    <a href="#sec-china">တရုတ်</a>
+    <a href="#sec-intl">နိုင်ငံခြား</a>
 </nav>
 
 <header>
@@ -105,85 +124,133 @@
 </header>
 
 <div class="search-container">
-    <input type="text" id="searchBox" class="search-box" placeholder="ရှာဖွေရန်..." onkeyup="doSearch()">
+    <input type="text" id="searchBox" class="search-box" placeholder="ဇာတ်ကားရှာရန်..." onkeyup="doSearch()">
 </div>
 
 <div class="container">
-    <section id="sec-myanmar"><h2 class="category-title">MYANMAR</h2><div class="movie-grid" id="grid-myanmar"></div></section>
-    <section id="sec-japan"><h2 class="category-title">JAPANESE</h2><div class="movie-grid" id="grid-japan"></div></section>
-    <section id="sec-china"><h2 class="category-title">CHINESE</h2><div class="movie-grid" id="grid-china"></div></section>
-    <section id="sec-intl"><h2 class="category-title">INTERNATIONAL</h2><div class="movie-grid" id="grid-intl"></div></section>
+    <section id="sec-myanmar">
+        <h2 class="category-title">MYANMAR</h2>
+        <div class="movie-grid grid-collapsed" id="grid-myanmar"></div>
+        <button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">View More</button>
+    </section>
+
+    <section id="sec-japan">
+        <h2 class="category-title">JAPANESE</h2>
+        <div class="movie-grid grid-collapsed" id="grid-japan"></div>
+        <button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">View More</button>
+    </section>
+
+    <section id="sec-china">
+        <h2 class="category-title">CHINESE</h2>
+        <div class="movie-grid grid-collapsed" id="grid-china"></div>
+        <button class="toggle-btn" onclick="toggleGrid('grid-china', this)">View More</button>
+    </section>
+
+    <section id="sec-intl">
+        <h2 class="category-title">INTERNATIONAL</h2>
+        <div class="movie-grid grid-collapsed" id="grid-intl"></div>
+        <button class="toggle-btn" onclick="toggleGrid('grid-intl', this)">View More</button>
+    </section>
 </div>
 
+<!-- Modal -->
 <div id="movieModal" class="modal" onclick="closeM()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-left"><img id="mImg" src=""></div>
         <div class="modal-right">
             <span class="close" onclick="closeM()">&times;</span>
-            <h2 id="mTitle"></h2>
-            <p id="mMeta" style="color:var(--primary); font-weight:bold;"></p>
-            <p id="mDesc" style="color:var(--text-dim); font-size:0.9em;"></p>
+            <h2 id="mTitle" style="margin-top:0;"></h2>
+            <div style="margin-bottom:20px;">
+                <span id="mRate" style="color:#ffbc00; font-weight:800;"></span>
+                <span id="mQual" style="margin-left:15px; border:1px solid var(--primary); padding:2px 8px; border-radius:5px; font-size:0.8em; color:var(--primary);"></span>
+            </div>
+            <p id="mDesc" style="color:var(--text-dim); line-height:1.6; height:120px; overflow-y:auto;"></p>
             <a id="mLink" href="#" target="_blank" class="watch-btn">WATCH ON TELEGRAM</a>
         </div>
     </div>
 </div>
 
 <script>
-    async function init() {
+    // ဇာတ်ကားတွေ စတင်ထည့်သွင်းခြင်း
+    async function loadMovies() {
         try {
             const res = await fetch('movies.json');
-            const data = await res.json();
+            const movies = await res.json();
             
-            data.forEach(movie => {
+            movies.forEach(movie => {
                 const grid = document.getElementById(`grid-${movie.category}`);
                 if(grid) {
                     const card = document.createElement('div');
                     card.className = 'movie-card';
-                    // Quality Badge သတ်မှတ်ချက်
                     const qClass = movie.quality === 'NEW' ? 'q-badge new' : 'q-badge';
                     
                     card.innerHTML = `
                         <div class="${qClass}">${movie.quality}</div>
-                        <img src="${movie.img}" alt="">
-                        <div class="movie-info"><div class="movie-title">${movie.title}</div></div>
+                        <img src="${movie.img}" alt="${movie.title}">
+                        <div class="movie-info">
+                            <div class="movie-title">${movie.title}</div>
+                        </div>
                     `;
                     card.onclick = () => openM(movie);
                     grid.appendChild(card);
                 }
             });
-        } catch (e) {
-            console.error("JSON ဖိုင်ဖတ်မရပါ - ", e);
-        }
+        } catch (e) { console.error("Error:", e); }
     }
 
+    // Modal ဖွင့်ခြင်း
     function openM(m) {
         document.getElementById('mImg').src = m.img;
         document.getElementById('mTitle').innerText = m.title;
-        document.getElementById('mMeta').innerText = `⭐ ${m.rating} | ${m.quality}`;
+        document.getElementById('mRate').innerText = `⭐ ${m.rating} / 10`;
+        document.getElementById('mQual').innerText = m.quality;
         document.getElementById('mDesc').innerText = m.description;
         document.getElementById('mLink').href = m.link;
         document.getElementById('movieModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
+    // Modal ပိတ်ခြင်း
     function closeM() {
         document.getElementById('movieModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
-    function doSearch() {
-        const input = document.getElementById('searchBox').value.toLowerCase();
-        const cards = document.getElementsByClassName('movie-card');
-        
-        for (let i = 0; i < cards.length; i++) {
-            const title = cards[i].innerText.toLowerCase();
-            if (title.includes(input)) {
-                cards[i].style.display = "block";
-            } else {
-                cards[i].style.display = "none";
-            }
+    // View More / Show Less Toggle
+    function toggleGrid(id, btn) {
+        const grid = document.getElementById(id);
+        if (grid.classList.contains('grid-collapsed')) {
+            grid.classList.remove('grid-collapsed');
+            btn.innerText = "Show Less";
+        } else {
+            grid.classList.add('grid-collapsed');
+            btn.innerText = "View More";
         }
     }
 
-    window.onload = init;
+    // Search ရှာဖွေခြင်း
+    function doSearch() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const cards = document.querySelectorAll('.movie-card');
+        const btns = document.querySelectorAll('.toggle-btn');
+        const grids = document.querySelectorAll('.movie-grid');
+
+        cards.forEach(card => {
+            const title = card.innerText.toLowerCase();
+            card.style.display = title.includes(query) ? "block" : "none";
+        });
+
+        // ရှာဖွေနေချိန်မှာ View More ခလုတ်တွေကို ခေတ္တဖျောက်ထားပြီး Grid ကို အကုန်ဖွင့်ပေးမယ်
+        if(query.length > 0) {
+            grids.forEach(g => g.classList.remove('grid-collapsed'));
+            btns.forEach(b => b.style.display = 'none');
+        } else {
+            grids.forEach(g => g.classList.add('grid-collapsed'));
+            btns.forEach(b => b.style.display = 'block');
+        }
+    }
+
+    window.onload = loadMovies;
 </script>
 
 </body>
