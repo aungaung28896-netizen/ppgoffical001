@@ -64,113 +64,35 @@
         }
         nav a:hover { background: var(--primary); color: #000; font-weight: bold; }
 
-        /* Search Section UI */
         .search-container { padding: 30px 20px; display: flex; justify-content: center; }
-        .search-wrapper {
-            position: relative; width: 100%; max-width: 500px;
-            display: flex; align-items: center;
-        }
+        .search-wrapper { position: relative; width: 100%; max-width: 500px; display: flex; align-items: center; }
         .search-box { 
             width: 100%; padding: 15px 60px 15px 25px; border-radius: 40px; 
             border: 2px solid #30363d; background: #161b22; color: white; 
             outline: none; transition: 0.4s; font-size: 1em;
         }
         .search-box:focus { border-color: var(--primary); box-shadow: 0 0 25px var(--accent-glow); }
-        
-        .search-btn {
-            position: absolute; right: 10px; background: var(--primary);
-            border: none; width: 40px; height: 40px; border-radius: 50%;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            transition: 0.3s; color: #000; font-size: 1.2rem;
-        }
-        .search-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
+        .search-btn { position: absolute; right: 10px; background: var(--primary); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; color: #000; font-size: 1.2rem; }
 
         .container { padding: 20px; max-width: 1250px; margin: 0 auto; }
-        
-        .category-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin: 40px 0 20px;
-        }
-        .category-title { 
-            color: var(--primary); font-size: 1.6em; margin: 0;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .count-badge {
-            background: rgba(255,255,255,0.1); color: var(--text-dim);
-            padding: 4px 12px; border-radius: 20px; font-size: 0.7em; font-weight: normal;
-        }
+        .category-header { display: flex; align-items: center; justify-content: space-between; margin: 40px 0 20px; }
+        .category-title { color: var(--primary); font-size: 1.6em; margin: 0; display: flex; align-items: center; gap: 10px; }
+        .count-badge { background: rgba(255,255,255,0.1); color: var(--text-dim); padding: 4px 12px; border-radius: 20px; font-size: 0.7em; font-weight: normal; }
 
-        .movie-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 25px;
-        }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px; }
         .movie-grid.collapsed { max-height: 440px; overflow: hidden; mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
 
-        .movie-card { 
-            position: relative;
-            background: var(--card-bg); border-radius: 15px; overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d; cursor: pointer;
-        }
-        .movie-card:hover { border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-
-        /* Skeleton Loading Effect */
-        @keyframes shimmer {
-            0% { background-position: -468px 0; }
-            100% { background-position: 468px 0; }
-        }
-        .movie-card img { 
-            width: 100%; height: 260px; object-fit: cover; pointer-events: none;
-            background: #1a1d23;
-            background-image: linear-gradient(to right, #1a1d23 0%, #2c313a 20%, #1a1d23 40%, #1a1d23 100%);
-            background-repeat: no-repeat;
-            animation: shimmer 1.5s infinite linear;
-        }
-
-        .quality-badge {
-            position: absolute; top: 10px; right: 10px;
-            background: var(--primary); color: #000;
-            font-size: 10px; font-weight: bold; padding: 3px 8px;
-            border-radius: 5px; z-index: 5; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .movie-info { padding: 15px; text-align: center; transform: translateZ(25px); }
+        .movie-card { position: relative; background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; cursor: pointer; }
+        .movie-card img { width: 100%; height: 260px; object-fit: cover; background: #1a1d23; }
+        .quality-badge { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; font-size: 10px; font-weight: bold; padding: 3px 8px; border-radius: 5px; z-index: 5; }
+        .movie-info { padding: 15px; text-align: center; }
         .movie-title { font-size: 0.9em; font-weight: 600; margin-bottom: 12px; height: 1.2em; overflow: hidden; }
-
-        .btn-link { 
-            display: block; background: linear-gradient(45deg, var(--secondary), var(--primary));
-            color: white; text-decoration: none; padding: 10px; border-radius: 10px; 
-            font-size: 0.8em; font-weight: bold; transition: 0.3s;
-        }
-        .btn-link:hover { filter: brightness(1.2); }
-        .btn-link:active { transform: scale(0.95); }
-
-        .toggle-btn {
-            background: transparent; border: 1px solid #30363d; color: var(--text-dim);
-            padding: 12px 30px; border-radius: 25px; cursor: pointer; transition: 0.3s;
-            margin: 25px auto; display: block; font-weight: bold;
-        }
-        .toggle-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-        #noResult {
-            display: none; text-align: center; padding: 50px 20px; color: var(--text-dim);
-        }
-
-        .floating-tg {
-            position: fixed; bottom: 30px; left: 30px;
-            background: #26A5E4; width: 55px; height: 55px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 20px rgba(38, 165, 228, 0.4);
-            z-index: 2000; transition: 0.3s; text-decoration: none; font-size: 22px;
-        }
-        .floating-tg:hover { transform: scale(1.1) rotate(10deg); }
-
-        #backToTop {
-            position: fixed; bottom: 30px; right: 30px; 
-            background: var(--primary); width: 55px; height: 55px; border-radius: 50%; 
-            display: none; justify-content: center; align-items: center; cursor: pointer; 
-            z-index: 2000; border: none; font-size: 20px; box-shadow: 0 10px 20px var(--accent-glow);
-        }
+        .btn-link { display: block; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: white; text-decoration: none; padding: 10px; border-radius: 10px; font-size: 0.8em; font-weight: bold; transition: 0.3s; }
+        
+        .toggle-btn { background: transparent; border: 1px solid #30363d; color: var(--text-dim); padding: 12px 30px; border-radius: 25px; cursor: pointer; transition: 0.3s; margin: 25px auto; display: block; font-weight: bold; }
+        #noResult { display: none; text-align: center; padding: 50px 20px; color: var(--text-dim); }
+        .floating-tg { position: fixed; bottom: 30px; left: 30px; background: #26A5E4; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 20px rgba(38, 165, 228, 0.4); z-index: 2000; transition: 0.3s; text-decoration: none; font-size: 22px; }
+        #backToTop { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 55px; height: 55px; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; border: none; font-size: 20px; }
 
         @media (max-width: 600px) {
             .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -194,13 +116,8 @@
 
 <div class="search-container">
     <div class="search-wrapper">
-        <!-- Input မှာ onkeydown ထည့်ပြီး enter စစ်ထားပါတယ် -->
-        <!-- oninput မှာ စာသားမရှိတော့ရင် reset လုပ်ဖို့ ထည့်ထားပါတယ် -->
-        <input type="text" id="searchInput" class="search-box" 
-               onkeydown="if(event.key==='Enter') handleSearch()" 
-               oninput="if(this.value==='') resetSearch()"
-               placeholder="ဇာတ်ကားအမည်ရိုက်ပြီး Enter နှိပ်ပါ...">
-        <button class="search-btn" onclick="handleSearch()">🔍</button>
+        <input type="text" id="searchInput" class="search-box" oninput="handleSearch()" placeholder="ဇာတ်ကားအမည်ရိုက်ပြီး ရှာပါ...">
+        <button class="search-btn">🔍</button>
     </div>
 </div>
 
@@ -208,182 +125,130 @@
     <div id="noResult">
         <div style="font-size: 3rem; margin-bottom: 10px;">🔍</div>
         <h3>ရှာဖွေမှုမတွေ့ပါ</h3>
-        <p>အခြားအမည်တစ်ခုခုဖြင့် ပြန်လည်ရှာဖွေကြည့်ပါ။</p>
     </div>
 
     <!-- မြန်မာ -->
     <section id="sec-myanmar">
         <div class="category-header">
-            <h2 class="category-title">မြန်မာဇာတ်ကားများ <span class="count-badge" id="count-myanmar">0</span></h2>
+            <h2 class="category-title">မြန်မာဇာတ်ကားများ <span class="count-badge" id="count-myanmar">0 Movie</span></h2>
         </div>
-        <div class="movie-grid collapsed" id="grid-myanmar">
-            <div class="movie-card tilt-card"><span class="quality-badge">NEW</span><img src="https://i.ibb.co/tpVkWCC3/photo-2024-09-09-00-19-47.jpg" alt="Yoon May" loading="lazy"><div class="movie-info"><div class="movie-title">Yoon May</div><a href="https://t.me/pyawpyawgyi/919?single" class="btn-link">Telegram တွင်ကြည့်ရန်</a></div></div>
-             <div class="movie-card tilt-card"><span class="quality-badge">NEW</span><img src="https://i.ibb.co/Mx5dNxpB/6318695228512080906-121.jpg" alt="Yoon May" loading="lazy"><div class="movie-info"><div class="movie-title">Hot Gorl</div><a href="https://t.me/pyawpyawgyi/966?single" class="btn-link">Telegram တွင်ကြည့်ရန်</a></div></div>
-        </div>
+        <div class="movie-grid collapsed" id="grid-myanmar"></div>
         <button class="toggle-btn" onclick="toggleGrid('grid-myanmar', this)">View More ▼</button>
     </section>
 
     <!-- ဂျပန် -->
     <section id="sec-japan">
         <div class="category-header">
-            <h2 class="category-title">ဂျပန်ဇာတ်ကားများ (JAV) <span class="count-badge" id="count-japan">0</span></h2>
+            <h2 class="category-title">ဂျပန်ဇာတ်ကားများ <span class="count-badge" id="count-japan">0 Movie</span></h2>
         </div>
-        <div class="movie-grid collapsed" id="grid-japan">
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/gLvhbf9Z/royd00296pl.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">ROYD-296</div><a href="https://t.me/ppgjav/614?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/1tX3fxrr/roe00449ps.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">ROE-449</div><a href="https://t.me/ppgjav/608?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/Rp2hC8Kr/1.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">HMN-786</div><a href="https://t.me/ppgjav/611?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/Mkd9djr4/snos00104ps.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">SNOS-104</div><a href="https://t.me/ppgjav/602?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/CpKS8TLv/roe00454ps.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">ROE-454</div><a href="https://t.me/ppgjav/603?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/Vcsrs6wF/6309953668689629485-119.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">SONE-900</div><a href="https://t.me/ppgjav/624" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/tpZHmDS4/photo-2026-05-03-00-46-49.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">ခွင့်လွှတ်ပါမောင်</div><a href="https://t.me/ppgjav/637?single" class="btn-link">ကြည့်ရန်</a></div></div>
-        </div>
+        <div class="movie-grid collapsed" id="grid-japan"></div>
         <button class="toggle-btn" onclick="toggleGrid('grid-japan', this)">View More ▼</button>
     </section>
 
     <!-- တရုတ် -->
     <section id="sec-china">
         <div class="category-header">
-            <h2 class="category-title">တရုတ်ဇာတ်ကားများ <span class="count-badge" id="count-china">0</span></h2>
+            <h2 class="category-title">တရုတ်ဇာတ်ကားများ <span class="count-badge" id="count-china">0 Movie</span></h2>
         </div>
-        <div class="movie-grid collapsed" id="grid-china">
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/rRF4tm4B/6122790998359780986-120.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">91CM-083</div><a href="https://t.me/ppgchina/257?single" class="btn-link">ကြည့်ရန်</a></div></div>
-             <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/B2XF446f/6122790998359780987-120.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">Kiss</div><a href="https://t.me/ppgchina/255?single" class="btn-link">ကြည့်ရန်</a></div></div>
-        </div>
+        <div class="movie-grid collapsed" id="grid-china"></div>
         <button class="toggle-btn" onclick="toggleGrid('grid-china', this)">View More ▼</button>
     </section>
 
     <!-- နိုင်ငံခြား -->
     <section id="sec-intl">
         <div class="category-header">
-            <h2 class="category-title">နိုင်ငံခြားဇာတ်ကားများ <span class="count-badge" id="count-intl">0</span></h2>
+            <h2 class="category-title">နိုင်ငံခြားဇာတ်ကားများ <span class="count-badge" id="count-intl">0 Movie</span></h2>
         </div>
-        <div class="movie-grid collapsed" id="grid-intl">
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/MFybdZs/6224491533260492450-120.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">International Action</div><a href="https://t.me/ppgenglish/191?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/DFfcBdN/6262380158492806973-119.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">Two One</div><a href="https://t.me/ppgenglish/182?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/Z116M6KB/photo-2026-03-08-12-53-59.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">Cousin Love</div><a href="https://t.me/ppgenglish/206?single" class="btn-link">ကြည့်ရန်</a></div></div>
-            <div class="movie-card tilt-card"><span class="quality-badge">HD</span><img src="https://i.ibb.co/spxfP1z6/photo-2025-09-08-23-04-37.jpg" loading="lazy"><div class="movie-info"><div class="movie-title">Uma Series</div><a href="https://t.me/ppgenglish/200" class="btn-link">ကြည့်ရန်</a></div></div>
-        </div>
+        <div class="movie-grid collapsed" id="grid-intl"></div>
         <button class="toggle-btn" onclick="toggleGrid('grid-intl', this)">View More ▼</button>
     </section>
 </div>
 
-<!-- Floating Elements -->
 <a href="https://t.me/PPGOfficalbot" class="floating-tg" target="_blank">✈️</a>
 <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
-    // Count Number Logic
+    // ဇာတ်ကားတွေကို JSON ကနေ ဆွဲထုတ်မယ်
+    async function loadMovies() {
+        try {
+            const response = await fetch('movies.json');
+            const movies = await response.json();
+            
+            movies.forEach(movie => {
+                const cardHTML = `
+                    <div class="movie-card tilt-card" data-title="${movie.title.toLowerCase()}">
+                        <span class="quality-badge">${movie.quality}</span>
+                        <img src="${movie.img}" alt="${movie.title}" loading="lazy">
+                        <div class="movie-info">
+                            <div class="movie-title">${movie.title}</div>
+                            <a href="${movie.link}" target="_blank" class="btn-link">Telegram တွင်ကြည့်ရန်</a>
+                        </div>
+                    </div>
+                `;
+                const grid = document.getElementById(`grid-${movie.category}`);
+                if (grid) grid.innerHTML += cardHTML;
+            });
+            updateCounts();
+            initTilt();
+        } catch (e) { console.error("Error loading movies:", e); }
+    }
+
     function updateCounts() {
-        const categories = ['myanmar', 'japan', 'china', 'intl'];
-        categories.forEach(cat => {
+        ['myanmar', 'japan', 'china', 'intl'].forEach(cat => {
             const count = document.querySelectorAll(`#grid-${cat} .movie-card`).length;
-            document.getElementById(`count-${cat}`).innerText = `${count} Movie`;
+            document.getElementById(`count-${cat}`).innerText = `${count} Movie${count > 1 ? 's' : ''}`;
         });
     }
-    updateCounts();
 
-    // 3D Tilt Logic
-    const cards = document.querySelectorAll('.tilt-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            if (window.innerWidth < 800) return;
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const rotateX = (y - rect.height/2) / 10;
-            const rotateY = (rect.width/2 - x) / 10;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    function initTilt() {
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                if (window.innerWidth < 800) return;
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(1000px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = ``);
         });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
-        });
-    });
+    }
 
-    // Grid Toggle
     function toggleGrid(id, btn) {
         const grid = document.getElementById(id);
-        if (grid.classList.contains('collapsed')) {
-            grid.classList.remove('collapsed');
-            grid.style.maxHeight = "none";
-            grid.style.maskImage = "none";
-            btn.innerText = "Show Less ▲";
-        } else {
-            grid.classList.add('collapsed');
-            grid.style.maxHeight = "";
-            grid.style.maskImage = "";
-            btn.innerText = "View More ▼";
-        }
+        const isCollapsed = grid.classList.toggle('collapsed');
+        btn.innerText = isCollapsed ? "View More ▼" : "Show Less ▲";
+        grid.style.maxHeight = isCollapsed ? "440px" : "none";
+        grid.style.maskImage = isCollapsed ? "" : "none";
     }
 
-    // Scroll Control
-    window.onscroll = () => {
-        const btn = document.getElementById("backToTop");
-        btn.style.display = window.scrollY > 400 ? "flex" : "none";
-    };
-
-    // Reset Search Logic (စာမျက်နှာကို မူလအတိုင်းပြန်ပို့ရန်)
-    function resetSearch() {
-        const movieCards = document.querySelectorAll('.movie-card');
-        const sections = document.querySelectorAll('section');
-        const noResult = document.getElementById('noResult');
-        const grids = document.querySelectorAll('.movie-grid');
-
-        noResult.style.display = "none";
-        sections.forEach(sec => sec.style.display = "block");
-        movieCards.forEach(card => card.style.display = "block");
-        
-        // Grid တွေကို ပြန်ပြီး Collapsed ဖြစ်အောင် လုပ်ပေးခြင်း
-        grids.forEach(grid => {
-            grid.classList.add('collapsed');
-            grid.style.maxHeight = "";
-            grid.style.maskImage = "";
-        });
-        
-        // Button စာသားတွေကို ပြန်ပြင်ခြင်း
-        const btns = document.querySelectorAll('.toggle-btn');
-        btns.forEach(btn => btn.innerText = "View More ▼");
-    }
-
-    // Handle Search on Enter or Button Click
     function handleSearch() {
-        const q = document.getElementById('searchInput').value.toLowerCase().trim();
-        const movieCards = document.querySelectorAll('.movie-card');
-        const sections = document.querySelectorAll('section');
-        const noResult = document.getElementById('noResult');
-        
-        if (q === "") {
-            resetSearch();
-            return;
-        }
-
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.movie-card');
         let hasResult = false;
 
-        movieCards.forEach(card => {
-            const title = card.innerText.toLowerCase();
-            if (title.includes(q)) {
-                card.style.display = "block";
-                hasResult = true;
-            } else {
-                card.style.display = "none";
-            }
+        cards.forEach(card => {
+            const match = card.getAttribute('data-title').includes(q);
+            card.style.display = match ? "block" : "none";
+            if (match) hasResult = true;
         });
 
-        sections.forEach(sec => {
-            const visibleCards = sec.querySelectorAll('.movie-card[style*="display: block"]');
-            if (visibleCards.length > 0) {
-                sec.style.display = "block";
+        document.querySelectorAll('section').forEach(sec => {
+            const visible = sec.querySelectorAll('.movie-card[style="display: block"]').length > 0;
+            sec.style.display = q === "" || visible ? "block" : "none";
+            if (q !== "" && visible) {
                 const grid = sec.querySelector('.movie-grid');
                 grid.classList.remove('collapsed');
                 grid.style.maxHeight = "none";
-                grid.style.maskImage = "none";
-            } else {
-                sec.style.display = "none";
             }
         });
-
-        noResult.style.display = hasResult ? "none" : "block";
+        document.getElementById('noResult').style.display = hasResult || q === "" ? "none" : "block";
     }
-</script>
 
+    window.onscroll = () => {
+        document.getElementById("backToTop").style.display = window.scrollY > 400 ? "flex" : "none";
+    };
+
+    window.onload = loadMovies;
+</script>
 </body>
 </html>
