@@ -133,12 +133,12 @@
 
     async function loadMovies() {
         try {
-            // GitHub Pages အတွက် ./ ထည့်သုံးခြင်းက ပိုသေချာပါတယ်
             const res = await fetch('./movies.json');
             if (!res.ok) throw new Error("JSON file find error");
             const movies = await res.json();
             
             movies.forEach(movie => {
+                // Category နာမည်ကို case-insensitive ဖြစ်အောင် toLowerCase() လုပ်ထားပါတယ်
                 const gridId = `grid-${movie.category.toLowerCase()}`;
                 const grid = document.getElementById(gridId);
                 
@@ -146,28 +146,24 @@
                     const card = document.createElement('div');
                     card.className = 'movie-card';
                     
-                    // Data မပြည့်စုံပါက Default စာသားများ သုံးရန်
-                    const quality = movie.quality || "HD";
-                    const image = movie.img || "https://via.placeholder.com/300x450?text=No+Image";
-                    
-                    card.innerHTML = `
-                        <div class="q-badge">${quality}</div>
-                        <img src="${image}" onerror="this.src='https://via.placeholder.com/300x450?text=Error+Loading'">
-                        <div class="movie-info">${movie.title}</div>
-                    `;
+                    // ပုံမရှိလျှင် Placeholder ပြရန်နှင့် Quality အား default HD ပေးရန်
+                    const movieQuality = movie.quality || "HD";
+                    const movieImg = movie.img || "https://via.placeholder.com/150?text=No+Image";
+
+                    card.innerHTML = `<div class="q-badge">${movieQuality}</div><img src="${movieImg}" onerror="this.src='https://via.placeholder.com/150?text=Error'"><div class="movie-info">${movie.title}</div>`;
                     card.onclick = () => openM(movie);
                     grid.appendChild(card);
                 }
             });
             updateHistoryUI();
         } catch (e) { 
-            console.error("Error loading JSON:", e);
+            console.error("Error loading JSON:", e); 
         }
     }
 
     function openM(m) {
         document.getElementById('mImg').src = m.img || "";
-        document.getElementById('mTitle').innerText = m.title || "Unknown Title";
+        document.getElementById('mTitle').innerText = m.title || "No Title";
         document.getElementById('mRate').innerText = m.rating ? `⭐ ${m.rating}` : "⭐ 0.0";
         document.getElementById('mQual').innerText = m.quality || "HD";
         document.getElementById('mDesc').innerText = m.description || "No description available.";
@@ -221,7 +217,7 @@
 
     function updateHistoryUI() {
         const container = document.getElementById('searchHistory');
-        if(container) {
+        if (container) {
             container.innerHTML = searchHistory.map(h => `<span class="history-item" onclick="quickSearch('${h}')">${h}</span>`).join('');
         }
     }
@@ -233,7 +229,7 @@
 
     window.onscroll = function() {
         const btt = document.getElementById('backToTop');
-        if(btt) {
+        if (btt) {
             btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
         }
     };
