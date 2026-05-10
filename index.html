@@ -133,29 +133,45 @@
 
     async function loadMovies() {
         try {
-            const res = await fetch('movies.json');
+            // GitHub Pages အတွက် ./ ထည့်သုံးခြင်းက ပိုသေချာပါတယ်
+            const res = await fetch('./movies.json');
+            if (!res.ok) throw new Error("JSON file find error");
             const movies = await res.json();
+            
             movies.forEach(movie => {
-                const grid = document.getElementById(`grid-${movie.category}`);
+                const gridId = `grid-${movie.category.toLowerCase()}`;
+                const grid = document.getElementById(gridId);
+                
                 if(grid) {
                     const card = document.createElement('div');
                     card.className = 'movie-card';
-                    card.innerHTML = `<div class="q-badge">${movie.quality}</div><img src="${movie.img}"><div class="movie-info">${movie.title}</div>`;
+                    
+                    // Data မပြည့်စုံပါက Default စာသားများ သုံးရန်
+                    const quality = movie.quality || "HD";
+                    const image = movie.img || "https://via.placeholder.com/300x450?text=No+Image";
+                    
+                    card.innerHTML = `
+                        <div class="q-badge">${quality}</div>
+                        <img src="${image}" onerror="this.src='https://via.placeholder.com/300x450?text=Error+Loading'">
+                        <div class="movie-info">${movie.title}</div>
+                    `;
                     card.onclick = () => openM(movie);
                     grid.appendChild(card);
                 }
             });
             updateHistoryUI();
-        } catch (e) { console.error("Error loading JSON:", e); }
+        } catch (e) { 
+            console.error("Error loading JSON:", e);
+        }
     }
 
     function openM(m) {
-        document.getElementById('mImg').src = m.img;
-        document.getElementById('mTitle').innerText = m.title;
-        document.getElementById('mRate').innerText = `⭐ ${m.rating}`;
-        document.getElementById('mQual').innerText = m.quality;
-        document.getElementById('mDesc').innerText = m.description;
-        document.getElementById('mLink').href = m.link;
+        document.getElementById('mImg').src = m.img || "";
+        document.getElementById('mTitle').innerText = m.title || "Unknown Title";
+        document.getElementById('mRate').innerText = m.rating ? `⭐ ${m.rating}` : "⭐ 0.0";
+        document.getElementById('mQual').innerText = m.quality || "HD";
+        document.getElementById('mDesc').innerText = m.description || "No description available.";
+        document.getElementById('mLink').href = m.link || "#";
         document.getElementById('movieModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
@@ -183,7 +199,6 @@
             saveToHistory(query.trim());
         }
 
-        // ရှာနေချိန်မှာ View More ခလုတ်တွေ ခေတ္တဖျောက်ထားမယ်
         const btns = document.querySelectorAll('.toggle-btn');
         const grids = document.querySelectorAll('.movie-grid');
         if(query.length > 0) {
@@ -206,7 +221,9 @@
 
     function updateHistoryUI() {
         const container = document.getElementById('searchHistory');
-        container.innerHTML = searchHistory.map(h => `<span class="history-item" onclick="quickSearch('${h}')">${h}</span>`).join('');
+        if(container) {
+            container.innerHTML = searchHistory.map(h => `<span class="history-item" onclick="quickSearch('${h}')">${h}</span>`).join('');
+        }
     }
 
     function quickSearch(val) {
@@ -214,10 +231,11 @@
         doSearch();
     }
 
-    // Scroll effect for Back to Top button
     window.onscroll = function() {
         const btt = document.getElementById('backToTop');
-        btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
+        if(btt) {
+            btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
+        }
     };
 
     function scrollToTop() {
