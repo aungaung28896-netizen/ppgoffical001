@@ -131,38 +131,330 @@
 <script>
     // JSON Data များကို ဤနေရာတွင် တိုက်ရိုက် ထည့်သွင်းလိုက်ပါသည်
     const movies = [
-        { "category": "myanmar", "title": "Yoon May", "quality": "NEW", "rating": "9.2", "description": "Yoon May ရဲ့ လူကြိုက်များနေတဲ့ Video အသစ်လေးဖြစ်ပါတယ်။ Quality အကြည်နဲ့ Telegram မှာ ကြည့်ရှုနိုင်ပါပြီ။", "img": "https://i.ibb.co/tpVkWCC3/photo-2024-09-09-00-19-47.jpg", "link": "https://t.me/pyawpyawgyi/919?single" },
-        { "category": "myanmar", "title": "Hot Gorl", "quality": "NEW", "rating": "8.8", "description": "Hot ဖြစ်နေတဲ့ မြန်မာဇာတ်ကားအသစ်လေးပါ။ အစအဆုံးကို Telegram Link မှာ ဝင်ရောက်ကြည့်ရှုပါ။", "img": "https://i.ibb.co/Mx5dNxpB/6318695228512080906-121.jpg", "link": "https://t.me/pyawpyawgyi/966?single" },
-        { "category": "myanmar", "title": "မတ်တပ်ဆော်ကြ", "quality": "Good", "rating": "8.5", "description": "နာမည်ကြီးနေတဲ့ မြန်မာအပျော်ရိုက်ကားလေး ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/B5MTxSX9/6323323515335020891-121.jpg", "link": "https://t.me/pyawpyawgyi/931" },
-        { "category": "myanmar", "title": "လိုးတာတောင် အထာကျကျလိုးတာ", "quality": "Good", "rating": "6.7", "description": "ဘာမ ပြောမနေတော့ဘူး မြန်မာ ကိုယ်တိုင်ရိုက်လေး။", "img": "https://i.ibb.co/s9JD2mjr/photo-2026-05-05-19-24-36.jpg", "link": "https://t.me/pyawpyawgyi/938" },
-        { "category": "myanmar", "title": "Han Pan Pyo - Private Leak", "quality": "HD", "rating": "8.5", "description": "Han Pan Pyo ရဲ့ Limited Edition Video ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/F4BfCKrx/6169958496708183706-121.jpg", "link": "https://t.me/pyawpyawgyi/1104?single" },
-        { "category": "japan", "title": "ROYD-296", "quality": "HD", "rating": "9.0", "description": "ROYD Series ထဲက အလန်းစား ဂျပန် JAV ဇာတ်ကားကောင်း ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/gLvhbf9Z/royd00296pl.jpg", "link": "https://t.me/ppgjav/614?single" },
-        { "category": "japan", "title": "ROE-449", "quality": "HD", "rating": "8.7", "description": "ROE-449 - Premium Quality JAV Video.", "img": "https://i.ibb.co/1tX3fxrr/roe00449ps.jpg", "link": "https://t.me/ppgjav/608?single" },
-        { "category": "japan", "title": "HMN-786", "quality": "HD", "rating": "8.9", "description": "HMN Series ထဲက လူကြည့်အများဆုံး ဇာတ်ကားတစ်ကား ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/Rp2hC8Kr/1.jpg", "link": "https://t.me/ppgjav/611?single" },
-        { "category": "japan", "title": "SNOS-104", "quality": "HD", "rating": "8.6", "description": "SNOS-104 Premium Japanese Video.", "img": "https://i.ibb.co/Mkd9djr4/snos00104ps.jpg", "link": "https://t.me/ppgjav/602?single" },
-        { "category": "japan", "title": "ROE-454", "quality": "HD", "rating": "8.8", "description": "ROE Series အသစ်စက်စက် အကြည်ကားလေး ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/CpKS8TLv/roe00454ps.jpg", "link": "https://t.me/ppgjav/603?single" },
-        { "category": "japan", "title": "SONE-900", "quality": "HD", "rating": "9.1", "description": "SONE-900 High Definition JAV Series.", "img": "https://i.ibb.co/Vcsrs6wF/6309953668689629485-119.jpg", "link": "https://t.me/ppgjav/624" },
-        { "category": "japan", "title": "ခွင့်လွှတ်ပါမောင်", "quality": "HD", "rating": "9.3", "description": "ဂျပန်ဇာတ်ကားကောင်း မြန်မာစာတန်းထိုး။", "img": "https://i.ibb.co/tpZHmDS4/photo-2026-05-03-00-46-49.jpg", "link": "https://t.me/ppgjav/637?single" },
-        { "category": "japan", "title": "MNGS-051", "quality": "HD", "rating": "9.0", "description": "Spa မှာ အနှိပ်ခံရင်း ဖြစ်ပွားတဲ့ ဇာတ်လမ်းကောင်း။", "img": "https://i.ibb.co/kV9fNw3g/photo-2026-05-08-12-44-56.jpg", "link": "https://t.me/ppgjav/680" },
-        { "category": "japan", "title": "Mina & Akari Sweet Room", "quality": "HD", "rating": "9.4", "description": "Mina Kitano နဲ့ Akari Niimura တို့ရဲ့ Sweet Room ဇာတ်လမ်း။", "img": "https://i.ibb.co/20zKnJ7f/6336924328141723151-120.jpg", "link": "https://t.me/ppgjav/808?single" },
-        { "category": "japan", "title": "Hikaru Nagi - SONE-012", "quality": "HD", "rating": "9.5", "description": "J-Cup Hikaru Nagi ရဲ့ Maid ဝတ်စုံနဲ့ အလန်းစားကား။", "img": "https://i.ibb.co/fY8KsSYx/6334584021936970154-120.jpg", "link": "https://t.me/ppgjav/801?single" },
-        { "category": "japan", "title": "Squid Game Parody - DASS-534", "quality": "HD", "rating": "9.2", "description": "Squid Game ကို Parody ရိုက်ထားတဲ့ ဂျပန်ကား။", "img": "https://i.ibb.co/7JPW6s5D/6334584021936970145-120.jpg", "link": "https://t.me/ppgjav/792?single" },
-        { "category": "japan", "title": "Kasumi Tsukino - LULU-400", "quality": "HD", "rating": "9.3", "description": "Kasumi Tsukino ရဲ့ အိမ်သန့်ရှင်းရေး ဇာတ်လမ်း။", "img": "https://i.ibb.co/27p6gv1z/6329984777682883699-120.jpg", "link": "https://t.me/ppgjav/781?single" },
-        { "category": "japan", "title": "Mina Kitano - HMN-446", "quality": "HD", "rating": "9.6", "description": "Mina Kitano ရဲ့ အမိုက်စား တင်ပါးအလှ။", "img": "https://i.ibb.co/TxYm5ynn/6329984777682883681-120.jpg", "link": "https://t.me/ppgjav/770?single" },
-        { "category": "china", "title": "91CM-083", "quality": "HD", "rating": "8.4", "description": "တရုတ်အလန်းစား ဗီဒီယိုအသစ် ဖြစ်ပါတယ်။", "img": "https://i.ibb.co/rRF4tm4B/6122790998359780986-120.jpg", "link": "https://t.me/ppgchina/257?single" },
-        { "category": "china", "title": "Kiss", "quality": "HD", "rating": "8.9", "description": "Chinese Drama/Action Kiss Series Video.", "img": "https://i.ibb.co/B2XF446f/6122790998359780987-120.jpg", "link": "https://t.me/ppgchina/255?single" },
-        { "category": "china", "title": "Chinese 3P Live Show", "quality": "HD", "rating": "9.0", "description": "တရုတ်မင်းသမီးချောလေးနှစ်ယောက်နဲ့ 3P ရိုက်ကွက်။", "img": "https://i.ibb.co/kVwP32qw/6328037203287675067-121.jpg", "link": "https://t.me/ppgchina/299" },
-        { "category": "china", "title": "The Solitary Gourmet", "quality": "HD", "rating": "8.9", "description": "မျက်မှန်လေးနဲ့ တရုတ်မင်းသမီးချောလေး။", "img": "https://i.ibb.co/TD5JXnG8/6278021076470141012-121.jpg", "link": "https://t.me/ppgchina/289" },
-        { "category": "china", "title": "Her, My Brother's Wife", "quality": "HD", "rating": "9.1", "description": "Haruka နဲ့ အဖွဲ့သားတွေရဲ့ အိမ်တွင်းရေးဇာတ်လမ်း။", "img": "https://i.ibb.co/0yLw5WXW/6307743693267472540-121.jpg", "link": "https://t.me/ppgchina/282?single" },
-        { "category": "intl", "title": "International Action", "quality": "HD", "rating": "9.0", "description": "နိုင်ငံတကာမှ အလန်းစား Action ဗီဒီယိုများ။", "img": "https://i.ibb.co/MFybdZs/6224491533260492450-120.jpg", "link": "https://t.me/ppgenglish/191?single" },
-        { "category": "intl", "title": "Two One", "quality": "HD", "rating": "8.7", "description": "International Best Quality Series.", "img": "https://i.ibb.co/DFfcBdN/6262380158492806973-119.jpg", "link": "https://t.me/ppgenglish/182?single" },
-        { "category": "intl", "title": "Cousin Love", "quality": "HD", "rating": "9.1", "description": "နိုင်ငံခြားဇာတ်ကားကောင်းများကို Telegram တွင် ကြည့်ပါ။", "img": "https://i.ibb.co/Z116M6KB/photo-2026-03-08-12-53-59.jpg", "link": "https://t.me/ppgenglish/206?single" },
-        { "category": "intl", "title": "Uma Series", "quality": "HD", "rating": "8.5", "description": "UMA Series International English Video.", "img": "https://i.ibb.co/spxfP1z6/photo-2025-09-08-23-04-37.jpg", "link": "https://t.me/ppgenglish/200" },
-        { "category": "intl", "title": "သားကိုချစ်သော မိဒွေး", "quality": "HD", "rating": "8.5", "description": "မိထွေးနဲ့ လင်ပါသား ဇာတ်လမ်း။", "img": "https://i.ibb.co/mr2Q0cHh/photo-2025-11-07-00-12-39.jpg", "link": "https://t.me/ppgenglish/212?single" },
-        { "category": "intl", "title": "ကိုမဲကြီးနှင့်ဖြူလုံး", "quality": "HD", "rating": "9.1", "description": "Violet နဲ့ ကပ္ပလီကြီး ဇာတ်လမ်း။", "img": "https://i.ibb.co/1GpJXDVQ/photo-2024-02-10-14-42-18.jpg", "link": "https://t.me/ppgenglish/220" },
-        { "category": "intl", "title": "Winter Romance", "quality": "HD", "rating": "8.7", "description": "ဥရောပသူ အလှလေးနဲ့ ဆောင်းရာသီဇာတ်လမ်း။", "img": "https://i.ibb.co/pvwdCQwC/6136582812660862681-121.jpg", "link": "https://t.me/ppgenglish/252?single" },
-        { "category": "intl", "title": "Passion in Bed", "quality": "HD", "rating": "8.8", "description": "အနောက်တိုင်းမင်းသမီးချောလေးရဲ့ Passion။", "img": "https://i.ibb.co/9k861PJB/6309975938095058564-121.jpg", "link": "https://t.me/ppgenglish/250" },
-        { "category": "intl", "title": "The Bodyguard's Passion", "quality": "HD", "rating": "8.6", "description": "Bodyguard နဲ့ အနောက်တိုင်းမင်းသမီးဇာတ်လမ်း။", "img": "https://i.ibb.co/9mtc4h78/6278021076470141019-121.jpg", "link": "https://t.me/ppgenglish/247" }
+        [
+  {
+    "category": "myanmar",
+    "title": "Yoon May",
+    "quality": "NEW",
+    "rating": "9.2",
+    "description": "Yoon May ရဲ့ လူကြိုက်များနေတဲ့ Video အသစ်လေးဖြစ်ပါတယ်။ Quality အကြည်နဲ့ Telegram မှာ ကြည့်ရှုနိုင်ပါပြီ။",
+    "img": "https://i.ibb.co/tpVkWCC3/photo-2024-09-09-00-19-47.jpg",
+    "link": "https://t.me/pyawpyawgyi/919?single"
+  },
+  {
+    "category": "myanmar",
+    "title": "Hot Gorl",
+    "quality": "NEW",
+    "rating": "8.8",
+    "description": "Hot ဖြစ်နေတဲ့ မြန်မာဇာတ်ကားအသစ်လေးပါ။ အစအဆုံးကို Telegram Link မှာ ဝင်ရောက်ကြည့်ရှုပါ။",
+    "img": "https://i.ibb.co/Mx5dNxpB/6318695228512080906-121.jpg",
+    "link": "https://t.me/pyawpyawgyi/966?single"
+  },
+  {
+    "category": "myanmar",
+    "title": "မတ်တပ်ဆော်ကြ",
+    "quality": "Good",
+    "rating": "8.5",
+    "description": "နာမည်ကြီးနေတဲ့ မြန်မာအပျော်ရိုက်ကားလေး ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/B5MTxSX9/6323323515335020891-121.jpg",
+    "link": "https://t.me/pyawpyawgyi/931"
+  },
+  {
+    "category": "myanmar",
+    "title": "လိုးတာတောင် အထာကျကျလိုးတာ",
+    "quality": "Good",
+    "rating": "6.7",
+    "description": "ဘာမှ ပြောမနေတော့ဘူး မြန်မာ ကိုယ်တိုင်ရိုက်လေး။",
+    "img": "https://i.ibb.co/s9JD2mjr/photo-2026-05-05-19-24-36.jpg",
+    "link": "https://t.me/pyawpyawgyi/938"
+  },
+  {
+    "category": "myanmar",
+    "title": "Han Pan Pyo - Private Leak",
+    "quality": "HD",
+    "rating": "8.5",
+    "description": "Han Pan Pyo ရဲ့ Limited Edition Video ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/F4BfCKrx/6169958496708183706-121.jpg",
+    "link": "https://t.me/pyawpyawgyi/1104?single"
+  },
+    "category": "myanmar",
+    "title": "8တန်း ကျောင်းသူလေး",
+    "quality": "480p",
+    "rating": "8.9",
+    "description": "ခလေးမလေးကို အနောက်ကနေ အသေကျုံးထားတာဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/Wv0Z1krP/Screenshot-2026-05-12-134321.jpg",
+    "link": "https://t.me/pyawpyawgyi/1233"
+  },
+  {
+    "category": "japan",
+    "title": "ROYD-296",
+    "quality": "HD",
+    "rating": "9.0",
+    "description": "ROYD Series ထဲက အလန်းစား ဂျပန် JAV ဇာတ်ကားကောင်း ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/gLvhbf9Z/royd00296pl.jpg",
+    "link": "https://t.me/ppgjav/614?single"
+  },
+  {
+    "category": "japan",
+    "title": "ROE-449",
+    "quality": "HD",
+    "rating": "8.7",
+    "description": "ROE-449 - Premium Quality JAV Video.",
+    "img": "https://i.ibb.co/1tX3fxrr/roe00449ps.jpg",
+    "link": "https://t.me/ppgjav/608?single"
+  },
+  {
+    "category": "japan",
+    "title": "HMN-786",
+    "quality": "HD",
+    "rating": "8.9",
+    "description": "HMN Series ထဲက လူကြည့်အများဆုံး ဇာတ်ကားတစ်ကား ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/Rp2hC8Kr/1.jpg",
+    "link": "https://t.me/ppgjav/611?single"
+  },
+  {
+    "category": "japan",
+    "title": "SNOS-104",
+    "quality": "HD",
+    "rating": "8.6",
+    "description": "SNOS-104 Premium Japanese Video.",
+    "img": "https://i.ibb.co/Mkd9djr4/snos00104ps.jpg",
+    "link": "https://t.me/ppgjav/602?single"
+  },
+  {
+    "category": "japan",
+    "title": "ROE-454",
+    "quality": "HD",
+    "rating": "8.8",
+    "description": "ROE Series အသစ်စက်စက် အကြည်ကားလေး ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/CpKS8TLv/roe00454ps.jpg",
+    "link": "https://t.me/ppgjav/603?single"
+  },
+  {
+    "category": "japan",
+    "title": "SONE-900",
+    "quality": "HD",
+    "rating": "9.1",
+    "description": "SONE-900 High Definition JAV Series.",
+    "img": "https://i.ibb.co/Vcsrs6wF/6309953668689629485-119.jpg",
+    "link": "https://t.me/ppgjav/624"
+  },
+  {
+    "category": "japan",
+    "title": "ခွင့်လွှတ်ပါမောင်",
+    "quality": "HD",
+    "rating": "9.3",
+    "description": "ဂျပန်ဇာတ်ကားကောင်း မြန်မာစာတန်းထိုး။",
+    "img": "https://i.ibb.co/tpZHmDS4/photo-2026-05-03-00-46-49.jpg",
+    "link": "https://t.me/ppgjav/637?single"
+  },
+  {
+    "category": "japan",
+    "title": "MNGS-051",
+    "quality": "HD",
+    "rating": "9.0",
+    "description": "Spa မှာ အနှိပ်ခံရင်း ဖြစ်ပွားတဲ့ ဇာတ်လမ်းကောင်း။",
+    "img": "https://i.ibb.co/kV9fNw3g/photo-2026-05-08-12-44-56.jpg",
+    "link": "https://t.me/ppgjav/680"
+  },
+  {
+    "category": "japan",
+    "title": "Mina & Akari Sweet Room",
+    "quality": "HD",
+    "rating": "9.4",
+    "description": "Mina Kitano နဲ့ Akari Niimura တို့ရဲ့ Sweet Room ဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/20zKnJ7f/6336924328141723151-120.jpg",
+    "link": "https://t.me/ppgjav/808?single"
+  },
+  {
+    "category": "japan",
+    "title": "Hikaru Nagi - SONE-012",
+    "quality": "HD",
+    "rating": "9.5",
+    "description": "J-Cup Hikaru Nagi ရဲ့ Maid ဝတ်စုံနဲ့ အလန်းစားကား။",
+    "img": "https://i.ibb.co/fY8KsSYx/6334584021936970154-120.jpg",
+    "link": "https://t.me/ppgjav/801?single"
+  },
+  {
+    "category": "japan",
+    "title": "Squid Game Parody - DASS-534",
+    "quality": "HD",
+    "rating": "9.2",
+    "description": "Squid Game ကို Parody ရိုက်ထားတဲ့ ဂျပန်ကား။",
+    "img": "https://i.ibb.co/7JPW6s5D/6334584021936970145-120.jpg",
+    "link": "https://t.me/ppgjav/792?single"
+  },
+  {
+    "category": "japan",
+    "title": "Kasumi Tsukino - LULU-400",
+    "quality": "HD",
+    "rating": "9.3",
+    "description": "Kasumi Tsukino ရဲ့ အိမ်သန့်ရှင်းရေး ဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/27p6gv1z/6329984777682883699-120.jpg",
+    "link": "https://t.me/ppgjav/781?single"
+  },
+  {
+    "category": "japan",
+    "title": "Mina Kitano - HMN-446",
+    "quality": "HD",
+    "rating": "9.6",
+    "description": "Mina Kitano ရဲ့ အမိုက်စား တင်ပါးအလှ။",
+    "img": "https://i.ibb.co/TxYm5ynn/6329984777682883681-120.jpg",
+    "link": "https://t.me/ppgjav/770?single"
+  },
+  {
+  "category": "japan",
+  "title": "MIAA-833",
+  "quality": "HD",
+  "rating": "9.0",
+  "description": "အလန်းစား မင်းသမီးချောလေး ပါဝင်တဲ့ စိတ်လှုပ်ရှားဖွယ် ဂျပန် JAV ဇာတ်ကားကောင်း ဖြစ်ပါတယ်။",
+  "img": "https://i.ibb.co/TxYX33g7/6321187842847085156-121.jpg",
+  "link": "https://t.me/ppgjav/833"
+},
+{
+  "category": "japan",
+  "title": "Stars-831",
+  "quality": "HD",
+  "rating": "9.0",
+  "description": "ဇာတ်လမ်းဇာတ်ကွက် ကောင်းမွန်ပြီး ကြည့်ရှုသူ စိတ်ကျေနပ်စေမယ့် ဂျပန် JAV ဇာတ်ကားကောင်း ဖြစ်ပါတယ်။",
+  "img": "https://i.ibb.co/MxnNMNtD/6336806169296441828-119.jpg",
+  "link": "https://t.me/ppgjav/831"
+},
+    {
+  "category": "japan",
+  "title": "MIAA-829",
+  "quality": "HD",
+  "rating": "8.8",
+  "description": "မင်းသမီးချောလေးရဲ့ သရုပ်ဆောင်ချက်တွေနဲ့အတူ အလန်းစား ရိုက်ကူးထားတဲ့ ဂျပန် JAV ဇာတ်ကားကောင်း ဖြစ်ပါတယ်။",
+  "img": "https://i.ibb.co/jk0SvRhy/6319102232497951061-119.jpg",
+  "link": "https://t.me/ppgjav/829"
+},
+  {
+    "category": "china",
+    "title": "91CM-083",
+    "quality": "HD",
+    "rating": "8.4",
+    "description": "တရုတ်အလန်းစား ဗီဒီယိုအသစ် ဖြစ်ပါတယ်။",
+    "img": "https://i.ibb.co/rRF4tm4B/6122790998359780986-120.jpg",
+    "link": "https://t.me/ppgchina/257?single"
+  },
+  {
+    "category": "china",
+    "title": "Kiss",
+    "quality": "HD",
+    "rating": "8.9",
+    "description": "Chinese Drama/Action Kiss Series Video.",
+    "img": "https://i.ibb.co/B2XF446f/6122790998359780987-120.jpg",
+    "link": "https://t.me/ppgchina/255?single"
+  },
+  {
+    "category": "china",
+    "title": "Chinese 3P Live Show",
+    "quality": "HD",
+    "rating": "9.0",
+    "description": "တရုတ်မင်းသမီးချောလေးနှစ်ယောက်နဲ့ 3P ရိုက်ကွက်။",
+    "img": "https://i.ibb.co/kVwP32qw/6328037203287675067-121.jpg",
+    "link": "https://t.me/ppgchina/299"
+  },
+  {
+    "category": "china",
+    "title": "The Solitary Gourmet",
+    "quality": "HD",
+    "rating": "8.9",
+    "description": "မျက်မှန်လေးနဲ့ တရုတ်မင်းသမီးချောလေး။",
+    "img": "https://i.ibb.co/TD5JXnG8/6278021076470141012-121.jpg",
+    "link": "https://t.me/ppgchina/289"
+  },
+  {
+    "category": "china",
+    "title": "Her, My Brother's Wife",
+    "quality": "HD",
+    "rating": "9.1",
+    "description": "Haruka နဲ့ အဖွဲ့သားတွေရဲ့ အိမ်တွင်းရေးဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/0yLw5WXW/6307743693267472540-121.jpg",
+    "link": "https://t.me/ppgchina/282?single"
+  },
+  {
+    "category": "intl",
+    "title": "International Action",
+    "quality": "HD",
+    "rating": "9.0",
+    "description": "နိုင်ငံတကာမှ အလန်းစား Action ဗီဒီယိုများ။",
+    "img": "https://i.ibb.co/MFybdZs/6224491533260492450-120.jpg",
+    "link": "https://t.me/ppgenglish/191?single"
+  },
+  {
+    "category": "intl",
+    "title": "Two One",
+    "quality": "HD",
+    "rating": "8.7",
+    "description": "International Best Quality Series.",
+    "img": "https://i.ibb.co/DFfcBdN/6262380158492806973-119.jpg",
+    "link": "https://t.me/ppgenglish/182?single"
+  },
+  {
+    "category": "intl",
+    "title": "Cousin Love",
+    "quality": "HD",
+    "rating": "9.1",
+    "description": "နိုင်ငံခြားဇာတ်ကားကောင်းများကို Telegram တွင် ကြည့်ပါ။",
+    "img": "https://i.ibb.co/Z116M6KB/photo-2026-03-08-12-53-59.jpg",
+    "link": "https://t.me/ppgenglish/206?single"
+  },
+  {
+    "category": "intl",
+    "title": "Uma Series",
+    "quality": "HD",
+    "rating": "8.5",
+    "description": "UMA Series International English Video.",
+    "img": "https://i.ibb.co/spxfP1z6/photo-2025-09-08-23-04-37.jpg",
+    "link": "https://t.me/ppgenglish/200"
+  },
+  {
+    "category": "intl",
+    "title": "သားကိုချစ်သော မိဒွေး",
+    "quality": "HD",
+    "rating": "8.5",
+    "description": "မိထွေးနဲ့ လင်ပါသား ဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/mr2Q0cHh/photo-2025-11-07-00-12-39.jpg",
+    "link": "https://t.me/ppgenglish/212?single"
+  },
+  {
+    "category": "intl",
+    "title": "ကိုမဲကြီးနှင့်ဖြူလုံး",
+    "quality": "HD",
+    "rating": "9.1",
+    "description": "Violet နဲ့ ကပ္ပလီကြီး ဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/1GpJXDVQ/photo-2024-02-10-14-42-18.jpg",
+    "link": "https://t.me/ppgenglish/220"
+  },
+  {
+    "category": "intl",
+    "title": "Winter Romance",
+    "quality": "HD",
+    "rating": "8.7",
+    "description": "ဥရောပသူ အလှလေးနဲ့ ဆောင်းရာသီဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/pvwdCQwC/6136582812660862681-121.jpg",
+    "link": "https://t.me/ppgenglish/252?single"
+  },
+  {
+    "category": "intl",
+    "title": "Passion in Bed",
+    "quality": "HD",
+    "rating": "8.8",
+    "description": "အနောက်တိုင်းမင်းသမီးချောလေးရဲ့ Passion။",
+    "img": "https://i.ibb.co/9k861PJB/6309975938095058564-121.jpg",
+    "link": "https://t.me/ppgenglish/250"
+  },
+  {
+    "category": "intl",
+    "title": "The Bodyguard's Passion",
+    "quality": "HD",
+    "rating": "8.6",
+    "description": "Bodyguard နဲ့ အနောက်တိုင်းမင်းသမီးဇာတ်လမ်း။",
+    "img": "https://i.ibb.co/9mtc4h78/6278021076470141019-121.jpg",
+    "link": "https://t.me/ppgenglish/247"
+  }
     ];
 
     let searchHistory = JSON.parse(localStorage.getItem('ppgHistory')) || [];
